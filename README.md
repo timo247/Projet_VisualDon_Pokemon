@@ -1,4 +1,4 @@
-int) # Projet_VisualDon_Pokemon
+# Projet_VisualDon_Pokemon
 projet de visualisation de données à propos de pokemon
 
 
@@ -10,8 +10,6 @@ Ces données ont été mises en ligne pour enseigner aux enfants l'utilisation d
 
 
 # Description
-Comment sont structurées les données ? Parler du format, des attributs et du type de données
-
 Les données sont à la fois quantitatives continues et qualitatives nominales.
 Elles sont qualitatives ordinales car chacun des pokemon possède un numéro et que la liste est ordonnée selon ces nombres.
 
@@ -22,5 +20,12 @@ Les attributs de données sont les suivants:
 PokeDexIndex (Int) | Name of the Pokemon (String) | Type (String) | Other Type (String) | Sum of Attack, Sp. Atk, Defense, Sp. Def, Speed and HP (string) | Hit Points (Int) | Attack Strength (Int) | Defensive Strength (Int) | Special Attack Strength (Int) | Special Defensive Strength (Int)
 
 
-But: qu'est-ce que vous voulez découvrir ? Des tendances ? Vous voulez explorer ou expliquer?
-Références: Qui d'autre dans le web ou dans la recherche a utilisé ces données ? Dans quel but ?
+# But:
+qu'est-ce que vous voulez découvrir ? Des tendances ? Vous voulez explorer ou expliquer?
+
+Nous avons choisi pokemon car cela nous rappelle notre enfance. Il était intéressant d’explorer l’évolution de ces données évolutives. Découvrir les pokémons que nous n’avions pas à l’époque et surtout qui sont les pokémons tendances dorénavants.
+Nous avons décidé que nous nous baserions sur le côté explicatif des données.
+
+# Références:
+Qui d'autre dans le web ou dans la recherche a utilisé ces données ? Dans quel but ?
+20 différents utilisateurs ont mis à disposition leur analyse basées sur le jeu de données. Leurs objectifs sont essentiellement de type exploratoirs.
