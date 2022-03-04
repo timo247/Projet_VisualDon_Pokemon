@@ -27,5 +27,4 @@ Nous avons choisi pokemon car cela nous rappelle notre enfance. Il était intér
 Nous avons décidé que nous nous baserions sur le côté explicatif des données.
 
 # Références:
-Qui d'autre dans le web ou dans la recherche a utilisé ces données ? Dans quel but ?
 20 différents utilisateurs ont mis à disposition leur analyse basées sur le jeu de données. Leurs objectifs sont essentiellement de type exploratoirs.
