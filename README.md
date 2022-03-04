@@ -1,4 +1,4 @@
-# Projet_VisualDon_Pokemon
+int) # Projet_VisualDon_Pokemon
 projet de visualisation de données à propos de pokemon
 
 
@@ -16,6 +16,10 @@ Les données sont à la fois quantitatives continues et qualitatives nominales.
 Elles sont qualitatives ordinales car chacun des pokemon possède un numéro et que la liste est ordonnée selon ces nombres.
 
 Elles sont également quantitatives discrètes car il est possible d'accéder à une propriété spécifique d'un pokemon sans nécessité de prendre en compte toutes les autres caractérstiques du pokemon.
+
+Le document est mis à disposition sous la forme csv. 
+Les attributs de données sont les suivants:
+PokeDexIndex (Int) | Name of the Pokemon (String) | Type (String) | Other Type (String) | Sum of Attack, Sp. Atk, Defense, Sp. Def, Speed and HP (string) | Hit Points (Int) | Attack Strength (Int) | Defensive Strength (Int) | Special Attack Strength (Int) | Special Defensive Strength (Int)
 
 
 But: qu'est-ce que vous voulez découvrir ? Des tendances ? Vous voulez explorer ou expliquer?
