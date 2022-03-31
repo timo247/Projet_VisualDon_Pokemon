@@ -5,7 +5,6 @@ import { csv, json } from 'd3-fetch'
 // Pour importer les données
 // import file from '../data/data.csv'
 console.log("pikachu")
-
 //Récipération des données
 /*
 Promise.all([
@@ -14,8 +13,6 @@ Promise.all([
     console.log("datapok", pokemon)
 })
 */
-
-
 let pokemonsPerSeason = [];
 let season1Pokemons = [];
 let season7Pokemons = [];
@@ -26,7 +23,6 @@ let season5Pokemons = [];
 let season6Pokemons = [];
 let pokemonsPerType = []
 let elementsSchema = NaN
-
 
 d3.json('../donnees-pokemon.json')
     .then(function (data) {
@@ -44,10 +40,7 @@ d3.json('../donnees-pokemon.json')
                 season4Pokemons.push(pokemon)
             }
         });
-
         console.log(season1Pokemons)
-
-
         //Tri des pokemons par type:
         let dragonPokemons = []
         let firePokemons = []
@@ -74,87 +67,42 @@ d3.json('../donnees-pokemon.json')
             }
             else if (pokemon.Type1 == "Ground") {
                 groundPokemons.push(pokemon);
-            } else if(pokemon.Type1 == "Rock"){
+            } else if (pokemon.Type1 == "Rock") {
                 rockPokemons.push(pokemon);
-            } else  if (pokemon.Type1 == "Psychic")
-            {
+            } else if (pokemon.Type1 == "Psychic") {
                 psychicPokemons.push(pokemon)
-            } else  if (pokemon.Type1 == "Water")
-            {
+            } else if (pokemon.Type1 == "Water") {
                 waterPokemons.push(pokemon)
-            } 
-            else  if (pokemon.Type1 == "Electric")
-            {
+            }
+            else if (pokemon.Type1 == "Electric") {
                 electricPokemons.push(pokemon)
-            } 
-            else  if (pokemon.Type1 == "Grass")
-            {
+            }
+            else if (pokemon.Type1 == "Grass") {
                 grassPokemons.push(pokemon)
-            } else  if (pokemon.Type1 == "Normal")
-            {
+            } else if (pokemon.Type1 == "Normal") {
                 normalPokemons.push(pokemon)
-            } else  if (pokemon.Type1 == "Fighting")
-            {
+            } else if (pokemon.Type1 == "Fighting") {
                 fightingPokemons.push(pokemon)
-            } else  if (pokemon.Type1 == "Poison")
-            {
+            } else if (pokemon.Type1 == "Poison") {
                 poisonPokemons.push(pokemon)
-            } else  if (pokemon.Type1 == "Bug")
-            {
+            } else if (pokemon.Type1 == "Bug") {
                 bugPokemons.push(pokemon)
-            } else  if (pokemon.Type1 == "Flying")
-            {
+            } else if (pokemon.Type1 == "Flying") {
                 flyingPokemons.push(pokemon)
-            } else  if (pokemon.Type1 == "Ice")
-            {
+            } else if (pokemon.Type1 == "Ice") {
                 icePokemons.push(pokemon)
-            } else  if (pokemon.Type1 == "Dark")
-            {
+            } else if (pokemon.Type1 == "Dark") {
                 darkPokemons.push(pokemon)
-            } else  if (pokemon.Type1 == "Fire")
-            {
+            } else if (pokemon.Type1 == "Fire") {
                 firePokemons.push(pokemon)
-            } else  if (pokemon.Type1 == "Dragon")
-            {
+            } else if (pokemon.Type1 == "Dragon") {
                 dragonPokemons.push(pokemon)
-            } 
+            }
         });
         //Dessiner
 
-
         //Tri des pokemons
         console.log("metal", dragonPokemons)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         const notesParEleve = data.reduce((r, d) => {
             const notes = r[d.nom] || []
@@ -165,5 +113,54 @@ d3.json('../donnees-pokemon.json')
     .catch(function (error) {
         console.log(error);
     })
-		// { Alice: [5, 6], Bob: [4, 3] }
 
+
+
+function toggleSection(section) {
+    // Supprime/Ajoute la classe active sur la section
+    document.querySelector('section.active')?.classList.remove('active')
+    document.querySelector(`${section}-section`)?.classList.add('active')
+}
+
+function toggleNav(section) {
+    // Supprime/Ajoute la classe active sur le lien
+    document.querySelector('nav a.active')?.classList.remove('active')
+    document.querySelector(`nav a[href="${section}"]`)?.classList.add('active')
+}
+
+
+//Display des sections:
+// Affichage d'une section
+function displaySection() {
+    // S'il n'y a pas de hash (par ex, on est sur "localhost:8080/"), le défaut devient '#home'
+    const section = window.location.hash || '#home'
+
+    // Chargement des éléments custom par section
+    switch (section) {
+        case '#forces-faiblesses':
+            document.querySelectorAll('.active').classList.remove('active');
+            document.querySelector('.forces-faiblesses').classList.add('active');
+            break;
+
+        case '#schema-elements':
+            document.querySelectorAll('.active').classList.remove('active');
+            document.querySelector('.schema-elements').classList.add('active');
+            break;
+
+        case '#pokemons-par-type':
+            document.querySelectorAll('.active').classList.remove('active');
+            document.querySelector('.pokemons-par-type').classList.add('active');
+            break;
+
+        case '#combat':
+            document.querySelectorAll('.active').classList.remove('active');
+            document.querySelector('.combat').classList.add('active');
+            break;
+    }
+}
+
+// On link la fonction "displaySection" à l'événement hashchange pour être averti d'un changement de hash dans l'url
+window.addEventListener('hashchange', displaySection)
+
+// Affichage au chargement pour traiter l'url en cours (exemple: on ouvre un lien dans un nouvel onglet)
+displaySection()
