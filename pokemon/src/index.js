@@ -15,7 +15,6 @@ Promise.all([
 */
 let pokemonsPerSeason = [];
 let season1Pokemons = [];
-let season7Pokemons = [];
 let season2Pokemons = [];
 let season3Pokemons = [];
 let season4Pokemons = [];
@@ -99,15 +98,62 @@ d3.json('../donnees-pokemon.json')
                 dragonPokemons.push(pokemon)
             }
         });
+
+
+        //Regrouppement des données dans un objet pour faciliter son utilisation
+        let orderedDatas = {}
+        orderedDatas.seasons = {
+            1: season1Pokemons,
+            2: season2Pokemons,
+            3: season3Pokemons,
+            4: season4Pokemons
+        }
+
+        
         //Dessiner
+        const margin = { top: 10, right: 40, bottom: 10, left: 40 };
+
+        //Resume-section
+
+        //Etablissement de base de la saisoon à 1
+        let currentSeason = 2;
+        console.log("dynamic", orderedDatas.seasons[currentSeason])
+
+
+
+        let resumeSvg = d3.select('.resume-svg')
+        const resumeWidth = 900 - margin.left - margin.right;
+        const resumeHeight = 400 - margin.top - margin.bottom;
+
+
+
+    resumeSvg.attr("width", resumeWidth + margin.left + margin.right)
+        .attr("height", resumeHeight + margin.top + margin.bottom)
+        .append("g")
+        .attr("class", "firstGroup")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        resumeSvg.selectAll("seasonsPokemon")
+            .data(orderedDatas.seasons[currentSeason])
+            .enter()
+            .append("circle")
+            .attr("cx", (d,i) => i+10)
+            .attr("cy", (d,i) => i+10)
+            .attr("r", d => 3)
+            .style("fill", d=>chooseColorDisplayOnType(d))
+            .attr("transform", "translate(100, 10)")
+            .attr("class", (d) => d.Name)
+
+
 
         //Tri des pokemons
         console.log("metal", dragonPokemons)
-
+        /*
         const notesParEleve = data.reduce((r, d) => {
             const notes = r[d.nom] || []
             return { ...r, [d.nom]: [...notes, d.note] }
         }, {})
+        */
 
     })
     .catch(function (error) {
@@ -200,3 +246,43 @@ window.addEventListener('hashchange', displaySection)
 
 // Affichage au chargement pour traiter l'url en cours (exemple: on ouvre un lien dans un nouvel onglet)
 displaySection()
+
+
+function chooseColorDisplayOnType(pokemon){
+    if (pokemon.Type1 == "Ghost") {
+        return"black";
+    } else if (pokemon.Type1 == "Grass") {
+        return "Olive"
+    }
+    else if (pokemon.Type1 == "Ground") {
+        return "Wheat";
+    } else if (pokemon.Type1 == "Rock") {
+        return"Tan"
+    } else if (pokemon.Type1 == "Psychic") {
+        return"Violet"
+    } else if (pokemon.Type1 == "Water") {
+        return"blue"
+    }
+    else if (pokemon.Type1 == "Electric") {
+        return"violet"
+    }
+     else if (pokemon.Type1 == "Normal") {
+        return"WhiteSmoke"
+    } else if (pokemon.Type1 == "Fighting") {
+       return"Tomato"
+    } else if (pokemon.Type1 == "Poison") {
+        return"Purple"
+    } else if (pokemon.Type1 == "Bug") {
+        return"DarkSlateGrey"
+    } else if (pokemon.Type1 == "Flying") {
+        return "DarkKhaki"
+    } else if (pokemon.Type1 == "Ice") {
+        return"LightCyan";
+    } else if (pokemon.Type1 == "Dark") {
+        return"DimGrey"
+    } else if (pokemon.Type1 == "Fire") {
+        return"DarkOrange"
+    } else if (pokemon.Type1 == "Dragon") {
+        return"LightCoral"
+    }
+}
