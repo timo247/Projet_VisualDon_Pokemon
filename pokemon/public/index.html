@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <title>Projet VisualDon 22 - Pokemon</title>
     <script src="main.js"></script>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
 
@@ -14,43 +15,42 @@
 
     <main>
       <body>
-        <section id="resume">
-          <a href="#forces-faiblesses">Next</a>      
+        <section class="resume active">
           <div class="resume-wrapper">
-            <svg class="resume-svg"></svg>    
+            <svg class="resume-svg"></svg> 
+            <a href="#forces-faiblesses">Next</a>         
           </div>
         </section>
 
-        <section id="forces-faiblesses hidden">
-          <div class="forces-faiblesses">
-            <svg class="forces-faiblesses-svg">
-              
-            </svg> 
+        <section class="forces-faiblesses hidden">
+          <div class="forces-faiblesses-wrapper">
+            <svg class="forces-faiblesses-svg"></svg>         
+            <a href="#schema-elements">Next</a>  
+            <a href="#resume">Previous</a>     
           </div>
         </section>
 
 
-        <section id="schema-elements  hidden">
-            <div class="schema-elements">
-              <svg class="schema-element-svg">
-              
-              </svg> 
+        <section class="schema-elements  hidden">
+            <div class="schema-elements-wrapper">
+              <svg class="schema-element-svg"></svg> 
+              <a href="#pokemons-par-type">Next</a>
+              <a href="#forces-faiblesses">Previous</a>       
             </div>
         </section>
 
-        <section id="pokemons-par-type hidden">
-          <div class="pokemons-par-type">
-            <svg class="pokemon-par-type-svg">
-              
-            </svg> 
+        <section class="pokemons-par-type hidden">
+          <div class="pokemons-par-type-wrapper">
+            <svg class="pokemon-par-type-svg"></svg> 
+            <a href="#combat">Next</a>   
+            <a href="#schema-elements">Previous</a>    
           </div>
         </section>
 
-        <section id="combat hidden">
-            <div class="combat">
-              <svg class="combat-svg">
-              
-              </svg> 
+        <section class="combat hidden">
+            <div class="combat-wrapper">
+              <svg class="combat-svg"></svg> 
+              <a href="#pokemons-par-type">Previous</a> 
             </div>
         </section>
       </body>

@@ -138,23 +138,59 @@ function displaySection() {
     // Chargement des éléments custom par section
     switch (section) {
         case '#forces-faiblesses':
-            document.querySelectorAll('.active').classList.remove('active');
+            //Gestion de l'affichage de la section
+           let activeSections =  document.querySelectorAll('.active');
+           console.log('avtives', activeSections)
+           activeSections.forEach(section => {
+               section.classList.add('hidden')
+           });
+           activeSections.forEach(section => {
+            section.classList.remove('active')
+        });
             document.querySelector('.forces-faiblesses').classList.add('active');
+            document.querySelector('.forces-faiblesses').classList.remove('hidden');
             break;
 
         case '#schema-elements':
-            document.querySelectorAll('.active').classList.remove('active');
+             //Gestion de l'affichage de la section
+            activeSections =  document.querySelectorAll('.active');
+           console.log('avtives', activeSections)
+           activeSections.forEach(section => {
+               section.classList.add('hidden')
+           });
+           activeSections.forEach(section => {
+            section.classList.remove('active')
+        });
             document.querySelector('.schema-elements').classList.add('active');
+            document.querySelector('.schema-elements').classList.remove('hidden');
             break;
 
         case '#pokemons-par-type':
-            document.querySelectorAll('.active').classList.remove('active');
-            document.querySelector('.pokemons-par-type').classList.add('active');
+             //Gestion de l'affichage de la section
+             activeSections =  document.querySelectorAll('.active');
+             console.log('avtives', activeSections)
+             activeSections.forEach(section => {
+                 section.classList.add('hidden')
+             });
+             activeSections.forEach(section => {
+              section.classList.remove('active')
+          });
+              document.querySelector('.pokemons-par-type').classList.add('active');
+              document.querySelector('.pokemons-par-type').classList.remove('hidden');
             break;
 
         case '#combat':
-            document.querySelectorAll('.active').classList.remove('active');
-            document.querySelector('.combat').classList.add('active');
+            //Gestion de l'affichage de la section
+            activeSections =  document.querySelectorAll('.active');
+            console.log('avtives', activeSections)
+            activeSections.forEach(section => {
+                section.classList.add('hidden')
+            });
+            activeSections.forEach(section => {
+             section.classList.remove('active')
+         });
+             document.querySelector('.combat').classList.add('active');
+             document.querySelector('.combat').classList.remove('hidden');
             break;
     }
 }
