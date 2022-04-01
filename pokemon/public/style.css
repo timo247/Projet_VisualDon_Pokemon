@@ -1,3 +1,8 @@
 .hidden{
     display:none;
 }
+
+.resume-wrapper{
+    display:flex;
+    flex-direction:row;
+}
