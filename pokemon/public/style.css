@@ -1,3 +1,21 @@
+body {
+    margin: 0;
+}
+
+
+
 .hidden{
     display:none;
 }
+
+#containerLogo{
+    display:flex;
+    justify-content:center;
+    
+}
+/* pour les ID c est # et un point pour les classes*/
+#logoMain{
+    margin:1% 0;
+    width:15%;
+}
+    
