@@ -122,8 +122,8 @@ d3.json('../donnees-pokemon.json')
 
 
         let resumeSvg = d3.select('.resume-svg')
-        const resumeWidth = 900 - margin.left - margin.right;
-        const resumeHeight = 400 - margin.top - margin.bottom;
+        const resumeWidth = screen.width/2 - margin.left - margin.right;
+        const resumeHeight = screen.width*4/5 - margin.top - margin.bottom;
 
 
 
@@ -133,13 +133,20 @@ d3.json('../donnees-pokemon.json')
         .attr("class", "firstGroup")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+
+        let lineCircle = 0;
+        let colCircle = 0;
+
+
+
         resumeSvg.selectAll("seasonsPokemon")
             .data(orderedDatas.seasons[currentSeason])
             .enter()
             .append("circle")
-            .attr("cx", (d,i) => i+10)
-            .attr("cy", (d,i) => i+10)
-            .attr("r", d => 3)
+            .attr("cx", (d,i) => {if(i% 12 == 0){colCircle = 0; console.log("colCircle",colCircle)} else {colCircle++} return (colCircle * 40)})
+            //affichage des cercles en ligne
+            .attr("cy", (d,i) => {if(i% 12 == 0){lineCircle ++; console.log("lineCircle",lineCircle)} return (lineCircle * 40)})
+            .attr("r", d => 15)
             .style("fill", d=>chooseColorDisplayOnType(d))
             .attr("transform", "translate(100, 10)")
             .attr("class", (d) => d.Name)
