@@ -4,7 +4,7 @@ import { csv, json } from 'd3-fetch'
 
 // Pour importer les données
 // import file from '../data/data.csv'
-console.log("pikachu")
+//console.log("pikachu")
 //Récipération des données
 /*
 Promise.all([
@@ -13,6 +13,8 @@ Promise.all([
     console.log("datapok", pokemon)
 })
 */
+
+let seasonSelected = false;
 
 function fetchData() {
 
@@ -28,7 +30,7 @@ function fetchData() {
 
     d3.json('../donnees-pokemon.json')
         .then(function (data) {
-            console.log("pokemon", data)
+           // console.log("pokemon", data)
 
             //Tri des pokemons par saison
             data.forEach(pokemon => {
@@ -42,7 +44,7 @@ function fetchData() {
                     season4Pokemons.push(pokemon)
                 }
             });
-            console.log(season1Pokemons)
+            //console.log(season1Pokemons)
             //Tri des pokemons par type:
             let dragonPokemons = []
             let firePokemons = []
@@ -139,14 +141,14 @@ function toggleNav(section) {
 function displaySection(fetchedData) {
     // S'il n'y a pas de hash (par ex, on est sur "localhost:8080/"), le défaut devient '#home'
     const section = window.location.hash || '#home'
-    console.log("section", section)
+    //console.log("section", section)
 
     // Chargement des éléments custom par section
     switch (section) {
         case '#home':
             //Gestion de l'affichage de la section
             let activeSections = document.querySelectorAll('.active');
-            console.log('Rien')
+            //console.log('Rien')
             activeSections.forEach(section => {
                 section.classList.add('hidden')
             });
@@ -161,7 +163,7 @@ function displaySection(fetchedData) {
         case '#forces-faiblesses':
             //Gestion de l'affichage de la section
             activeSections = document.querySelectorAll('.active');
-            console.log('avtives', activeSections)
+            //console.log('avtives', activeSections)
             activeSections.forEach(section => {
                 section.classList.add('hidden')
             });
@@ -175,7 +177,7 @@ function displaySection(fetchedData) {
         case '#schema-elements':
             //Gestion de l'affichage de la section
             activeSections = document.querySelectorAll('.active');
-            console.log('avtives', activeSections)
+            //console.log('avtives', activeSections)
             activeSections.forEach(section => {
                 section.classList.add('hidden')
             });
@@ -189,7 +191,7 @@ function displaySection(fetchedData) {
         case '#pokemons-par-type':
             //Gestion de l'affichage de la section
             activeSections = document.querySelectorAll('.active');
-            console.log('avtives', activeSections)
+            //console.log('avtives', activeSections)
             activeSections.forEach(section => {
                 section.classList.add('hidden')
             });
@@ -203,7 +205,7 @@ function displaySection(fetchedData) {
         case '#combat':
             //Gestion de l'affichage de la section
             activeSections = document.querySelectorAll('.active');
-            console.log('avtives', activeSections)
+            //console.log('avtives', activeSections)
             activeSections.forEach(section => {
                 section.classList.add('hidden')
             });
@@ -259,22 +261,31 @@ function chooseColorDisplayOnType(pokemon) {
 
 function deleteSvgEls() {
     //Effacement de l'ensemble des éléments dessinés précédemment dans les svg
-    console.log("delete")
+    
     let svgEls = document.querySelectorAll('svg')
+    console.log("delete")
     svgEls.forEach(svgEl => {
         let svgChidlren = svgEl.childNodes
-        console.log(svgChidlren)
+        //console.log(svgChidlren)
         svgChidlren.forEach(element => {
+            let parent = element.parentNode;
+            console.log("deleted", parent)
+            element.remove();
+            console.log(element)
+            /*
             let parent = element.parentNode;
             console.log("delete", element)
             parent.removeChild(element);
             console.log("deleted", parent)
+            console.log("mtn", element);
+            */
         });
     });
 }
 
 
 function drawResumeDatas(orderedDatas, currentSeason) {
+    console.log("dessin")
     //Dessiner
     const margin = { top: 10, right: 40, bottom: 10, left: 40 };
     //Effacement de ce qui a précédement été dessiné
@@ -302,19 +313,34 @@ function drawResumeDatas(orderedDatas, currentSeason) {
     let lineCircle = 0;
     let colCircle = 0;
 
-    resumeSvg.selectAll("seasonsPokemon")
+
+    let resumeSvgGroupe = resumeSvg.append('g');
+
+    resumeSvgGroupe.selectAll("seasonsPokemon")
         .data(orderedDatas.seasons[currentSeason])
-        .enter()
+        .join(enter => enter
+       .append("g")
         .append("circle")
         .attr("cx", (d, i) => { if (i % 12 == 0) { colCircle = 0; console.log("colCircle", colCircle) } else { colCircle++ } return (colCircle * 40 - 40) })
         //affichage des cercles en ligne
-        .attr("cy", (d, i) => { if (i % 12 == 0) { lineCircle++; console.log("lineCircle", lineCircle) } return (lineCircle * 45 - 20) })
+        .attr("cy", (d, i) => { if (i % 12 == 0) { lineCircle++; } return (lineCircle * 45 - 20) })
         .attr("r", d => 15)
         .style("fill", d => chooseColorDisplayOnType(d))
         .attr("transform", "translate(100, 10)")
         .attr("class", (d) => d.Name)
         .attr("class", (d) => `pokeCircle ${d.Name}`)
-        .attr('data-name', (d) => `${d.Name}`)
+        .attr('data-name', (d) => `${d.Name}`),
+        exit => exit
+        .remove()
+            )
+
+
+
+    //Supression du texte de chacun des pokemons
+    let pokeText = document.querySelectorAll('.pokeText');
+    pokeText.forEach(text => {
+        text.remove();
+    });
 
     //Affichage du nom des pokemons en dessous
     let pokeCircles = document.querySelectorAll('.pokeCircle');
@@ -322,9 +348,9 @@ function drawResumeDatas(orderedDatas, currentSeason) {
         //console.log(pokeCircle.dataset)
         let name = pokeCircle.dataset.name;
         if (name.length > 10) {
-            console.log("firstName", name)
+           // console.log("firstName", name)
             name = name.slice(0, 9);
-            console.log("secondName", name)
+            //console.log("secondName", name)
         }
         let posX = Number.parseInt(pokeCircle.getAttribute("cx")) + 90;
         let posY = Number.parseInt(pokeCircle.getAttribute("cy")) + 35;
@@ -334,13 +360,14 @@ function drawResumeDatas(orderedDatas, currentSeason) {
             .attr("font-size", 6)
             .attr("font-family", "Calibri")
             .attr("font-weight", "bold")
+            .attr("class", "pokeText")
             .text(function () { return name });
     });
 
     //Ajout de la responsivité des boutons
     let reumeButtons = document.querySelectorAll('.season-select-button')
     reumeButtons.forEach(button => {
-        button.addEventListener("click", (e) => { console.log("click", e.target.dataset); let currentSeason = e.target.dataset.season; drawResumeDatas(orderedDatas, currentSeason) })
+        button.addEventListener("click", (e) => {let currentSeason = e.target.dataset.season; drawResumeDatas(orderedDatas, currentSeason) })
     });
 }
 
