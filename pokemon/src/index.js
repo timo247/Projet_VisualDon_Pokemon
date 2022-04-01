@@ -145,12 +145,33 @@ d3.json('../donnees-pokemon.json')
             .append("circle")
             .attr("cx", (d,i) => {if(i% 12 == 0){colCircle = 0; console.log("colCircle",colCircle)} else {colCircle++} return (colCircle * 40)})
             //affichage des cercles en ligne
-            .attr("cy", (d,i) => {if(i% 12 == 0){lineCircle ++; console.log("lineCircle",lineCircle)} return (lineCircle * 40)})
+            .attr("cy", (d,i) => {if(i% 12 == 0){lineCircle ++; console.log("lineCircle",lineCircle)} return (lineCircle * 45)})
             .attr("r", d => 15)
             .style("fill", d=>chooseColorDisplayOnType(d))
             .attr("transform", "translate(100, 10)")
             .attr("class", (d) => d.Name)
+            .attr("class", (d) => `pokeCircle ${d.Name}`)
+            .attr('data-name', (d) => `${d.Name}`)
 
+
+
+            //Affichage du nom des pokemons en dessous
+            let pokeCircles = document.querySelectorAll('.pokeCircle');
+            pokeCircles.forEach(pokeCircle => {
+                console.log(pokeCircle.dataset)
+                let name = pokeCircle.dataset.name;
+                let posX = Number.parseInt(pokeCircle.getAttribute("cx")) + 90;
+                let posY = Number.parseInt(pokeCircle.getAttribute("cy")) + 40;
+
+               
+                resumeSvg.append('text')
+
+                .attr('x', posX)
+                .attr("y", posY)
+                .attr("font-size", 6)
+                .text(function() { return name  });
+
+            });
 
 
         //Tri des pokemons
