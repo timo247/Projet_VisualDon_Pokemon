@@ -158,10 +158,17 @@ d3.json('../donnees-pokemon.json')
             //Affichage du nom des pokemons en dessous
             let pokeCircles = document.querySelectorAll('.pokeCircle');
             pokeCircles.forEach(pokeCircle => {
-                console.log(pokeCircle.dataset)
+                //console.log(pokeCircle.dataset)
                 let name = pokeCircle.dataset.name;
+             if(name.length > 10){
+                    console.log("firstName", name)
+                    name = name.slice(0,9);
+                    console.log("secondName", name)
+
+                }
+                
                 let posX = Number.parseInt(pokeCircle.getAttribute("cx")) + 90;
-                let posY = Number.parseInt(pokeCircle.getAttribute("cy")) + 40;
+                let posY = Number.parseInt(pokeCircle.getAttribute("cy")) + 35;
 
                
                 resumeSvg.append('text')
@@ -169,6 +176,8 @@ d3.json('../donnees-pokemon.json')
                 .attr('x', posX)
                 .attr("y", posY)
                 .attr("font-size", 6)
+                .attr("font-family", "Calibri")
+                .attr("font-weight", "bold")
                 .text(function() { return name  });
 
             });
