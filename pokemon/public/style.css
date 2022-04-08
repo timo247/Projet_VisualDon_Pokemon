@@ -1,9 +1,3 @@
-body {
-    margin: 0;
-}
-
-
-
 .hidden{
     display:none;
 }
@@ -18,4 +12,62 @@ body {
     margin:1% 0;
     width:15%;
 }
+
+body {
+    margin: 0;
+}
+
+#titrePage {
+    display:flex;
+    font-family: Pokemon;
+    letter-spacing: 6px;
+    background-color : black;
+    color: white;
+    padding: 20px;
+    justify-content: center;
+}
+.resume-season-selection {
+    display: flex;
+    justify-content: center;
+}
+
+.resume-wrapper {
+    display:flex;
+    align-items: space-between;
+    justify-content: space-evenly;
+}
+
+#listeSaison {
+    display: flex;
+    align-items: center;
+    padding : 2px 2px;
+    column: 3;
+    /* order: 8; */
+    flex-direction: column;
+    /* flex-direction: row; */
+    flex-wrap: wrap;
+    /* justify-content: space-between; */
+    /* align-items: stretch; */
+    gap: 10px 20px;
+
+}
+
+li {
+    list-style-type: none;
+}
+
+
+
+@font-face {
+    font-family: "Pokemon"; 
+    src: url("//db.onlinewebfonts.com/t/f4d1593471d222ddebd973210265762a.eot"); 
+    src: url("//db.onlinewebfonts.com/t/f4d1593471d222ddebd973210265762a.eot?#iefix") 
+    format("embedded-opentype"), url("//db.onlinewebfonts.com/t/f4d1593471d222ddebd973210265762a.woff2") 
+    format("woff2"), url("//db.onlinewebfonts.com/t/f4d1593471d222ddebd973210265762a.woff") 
+    format("woff"), url("//db.onlinewebfonts.com/t/f4d1593471d222ddebd973210265762a.ttf") 
+    format("truetype"), url("//db.onlinewebfonts.com/t/f4d1593471d222ddebd973210265762a.svg#Pokemon") 
+    format("svg"); }
+
+
+
     

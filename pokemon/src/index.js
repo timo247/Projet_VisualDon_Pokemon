@@ -163,7 +163,7 @@ function displaySection(fetchedData) {
         case '#forces-faiblesses':
             //Gestion de l'affichage de la section
             activeSections = document.querySelectorAll('.active');
-            //console.log('avtives', activeSections)
+            //console.log('actives', activeSections)
             activeSections.forEach(section => {
                 section.classList.add('hidden')
             });
@@ -177,7 +177,7 @@ function displaySection(fetchedData) {
         case '#schema-elements':
             //Gestion de l'affichage de la section
             activeSections = document.querySelectorAll('.active');
-            //console.log('avtives', activeSections)
+            //console.log('actives', activeSections)
             activeSections.forEach(section => {
                 section.classList.add('hidden')
             });
