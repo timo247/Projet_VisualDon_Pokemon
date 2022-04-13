@@ -14,6 +14,8 @@ Promise.all([
 })
 */
 
+
+
 let seasonSelected = false;
 
 function fetchData() {
@@ -341,7 +343,7 @@ function drawResumeDatas(orderedDatas, currentSeason) {
 }
 
 // On link la fonction "displaySection" à l'événement hashchange pour être averti d'un changement de hash dans l'url
-window.addEventListener('hashchange', displaySection)
+window.addEventListener('hashchange', () => fetchData())
 
 // Affichage au chargement pour traiter l'url en cours (exemple: on ouvre un lien dans un nouvel onglet)
 fetchData()
