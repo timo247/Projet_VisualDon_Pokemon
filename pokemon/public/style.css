@@ -83,7 +83,10 @@ li {
     list-style-type: none;
 }
 
-
+.forces-faiblesses-wrapper{
+    display:flex;
+    flex-direction:row;
+}
 
 @font-face {
     font-family: "Pokemon"; 
