@@ -288,21 +288,36 @@ function drawResumeDatas(orderedDatas, currentSeason) {
     console.log("dessin")
     //Dessiner
     const margin = { top: 10, right: 40, bottom: 10, left: 40 };
+
     const resumeWidth = screen.width / 2 - margin.left - margin.right;
     const resumeHeight = screen.width * 4 / 5 - margin.top - margin.bottom;
 
     //Effacement des circles resumés
     d3.select('.circle-resume').remove()
 
+    //Effacement de ce qui a précédement été dessiné
+   // deleteSvgEls();
+    //console.log("dynamic", orderedDatas.seasons[currentSeason])
+
+
+
     let resumeSvg = d3.select('.resume-svg')
+
     resumeSvg.attr("width", resumeWidth + margin.left + margin.right)
         .attr("height", resumeHeight + margin.top + margin.bottom)
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
         let groupe = resumeSvg.append('g').attr('class', 'circle-resume')
 
+
+
+
     //Création de cercles dont la couleur dépend du type du pokemon
+
     let lineCircle = 0;
     let colCircle = 0;
+
+
 
     groupe.selectAll("seasonsPokemon")
         .data(orderedDatas.seasons[currentSeason])
@@ -318,8 +333,41 @@ function drawResumeDatas(orderedDatas, currentSeason) {
         .attr("class", (d) => `pokeCircle ${d.Name}`)
         .attr('data-name', (d) => `${d.Name}`))
 
+
+            
+    // //Supression du texte de chacun des pokemons
+    // let pokeText = document.querySelectorAll('.pokeText');
+    // pokeText.forEach(text => {
+    //     text.remove();
+    // });
+
+    //Affichage du nom des pokemons en dessous
+    // let pokeCircles = document.querySelectorAll('.pokeCircle');
+    // pokeCircles.forEach(pokeCircle => {
+    //     //console.log(pokeCircle.dataset)
+    //     let name = pokeCircle.dataset.name;
+    //     if (name.length > 10) {
+    //        // console.log("firstName", name)
+    //         name = name.slice(0, 9);
+    //         //console.log("secondName", name)
+    //     }
+    //     let posX = Number.parseInt(pokeCircle.getAttribute("cx")) + 90;
+    //     let posY = Number.parseInt(pokeCircle.getAttribute("cy")) + 35;
+    //     resumeSvg.append('text')
+    //         .attr('x', posX)
+    //         .attr("y", posY)
+    //         .attr("font-size", 6)
+    //         .attr("font-family", "Calibri")
+    //         .attr("font-weight", "bold")
+    //         .attr("class", "pokeText")
+    //         .text(function () { return name });
+    // });
+
+
     // Dessin des textes
+
     let lineText = 0;
+
     let colText = 0;
 
     groupe.selectAll('text')
@@ -332,6 +380,8 @@ function drawResumeDatas(orderedDatas, currentSeason) {
             .attr("font-weight", "bold")
             .attr("class", "pokeText")
             .text(d => d.Name.length > 10 ? d.Name.slice(0,9) : d.Name))
+
+
 
     //Ajout de la responsivité des boutons
     let reumeButtons = document.querySelectorAll('.season-select-button')
