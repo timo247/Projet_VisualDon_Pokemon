@@ -13,6 +13,7 @@
     width:15%;
 }
 
+/* Pour la barre de navigation */
 #barrePokemon {
     list-style-type: none;
     margin: 0;
@@ -21,7 +22,7 @@
     background-color: #9cf588;
 }
 
-li {
+#barrePokemon li {
     float: left;
     display: inline;
 }
@@ -30,9 +31,15 @@ li {
     background-color: #0066ff;
 }
 
-.active {
-    background-color: #0066ff;
+#barrePokemon.active {
+    background-color: #ff00aa;
 }
+
+#PSsaison {
+    img : img\casquetteSacha.png;
+}
+
+/*----------------------------------------------------------*/
 
 body {
     margin: 0;
