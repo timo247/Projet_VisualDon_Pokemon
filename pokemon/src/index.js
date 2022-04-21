@@ -17,7 +17,7 @@ Promise.all([
 
 
 let seasonSelected = false;
-let dataToUpdate = {pokemonsPerType: []}
+let dataToUpdate = { pokemonsPerType: [] }
 
 
 function fetchData() {
@@ -107,12 +107,12 @@ function fetchData() {
                     steelPokemons.push(pokemon)
                 } else if (pokemon.Type1 == "Fairy") {
                     fairyPokemons.push(pokemon)
-                } 
+                }
             });
 
-       
-                
-            dataToUpdate.pokemonsPerType  = {
+
+
+            dataToUpdate.pokemonsPerType = {
                 Dragon: dragonPokemons,
                 Grass: grassPokemons,
                 Fire: firePokemons,
@@ -131,7 +131,7 @@ function fetchData() {
                 Poison: poisonPokemons,
                 Fighting: fightingPokemons,
                 Rock: rockPokemons
-                }
+            }
 
             // console.log(pokemonsPerType)
 
@@ -558,59 +558,120 @@ function drawPokemonsParType(fetchedData) {
     //Organisation de la donnée 
     const nbPerElements = [
         { Type1: "Ghost", nbPokemons: dataToUpdate.pokemonsPerType.Ghost.length },
-        { Type1: "Grass", nbPokemons:  dataToUpdate.pokemonsPerType.Grass.length },
-        { Type1: "Ground", nbPokemons:  dataToUpdate.pokemonsPerType.Ground.length },
-        { Type1: "Rock", nbPokemons:  dataToUpdate.pokemonsPerType.Rock.length },
-        { Type1: "Psychic", nbPokemons:  dataToUpdate.pokemonsPerType.Psychic.length},
-        { Type1: "Water", nbPokemons:  dataToUpdate.pokemonsPerType.Water.length},
-        { Type1: "Electric", nbPokemons:  dataToUpdate.pokemonsPerType.Electric.length},
-        { Type1: "Normal", nbPokemons:  dataToUpdate.pokemonsPerType.Normal.length},
-        { Type1: "Fighting", nbPokemons:  dataToUpdate.pokemonsPerType.Fighting.length},
-        { Type1: "Poison", nbPokemons:  dataToUpdate.pokemonsPerType.Poison.length},
-        { Type1: "Bug", nbPokemons:  dataToUpdate.pokemonsPerType.Bug.length},
-        { Type1: "Flying", nbPokemons:  dataToUpdate.pokemonsPerType.Flying.length},
-        { Type1: "Ice", nbPokemons:  dataToUpdate.pokemonsPerType.Ice.length},
-        { Type1: "Dark", nbPokemons:  dataToUpdate.pokemonsPerType.Dark.length},
-        { Type1: "Fire", nbPokemons:  dataToUpdate.pokemonsPerType.Fire.length},
-        { Type1: "Dragon", nbPokemons:  dataToUpdate.pokemonsPerType.Dragon.length},
-        { Type1: "Fairy", nbPokemons:  dataToUpdate.pokemonsPerType.Fairy.length},
-        { Type1: "Steel", nbPokemons:  dataToUpdate.pokemonsPerType.Steel.length}
+        { Type1: "Grass", nbPokemons: dataToUpdate.pokemonsPerType.Grass.length },
+        { Type1: "Ground", nbPokemons: dataToUpdate.pokemonsPerType.Ground.length },
+        { Type1: "Rock", nbPokemons: dataToUpdate.pokemonsPerType.Rock.length },
+        { Type1: "Psychic", nbPokemons: dataToUpdate.pokemonsPerType.Psychic.length },
+        { Type1: "Water", nbPokemons: dataToUpdate.pokemonsPerType.Water.length },
+        { Type1: "Electric", nbPokemons: dataToUpdate.pokemonsPerType.Electric.length },
+        { Type1: "Normal", nbPokemons: dataToUpdate.pokemonsPerType.Normal.length },
+        { Type1: "Fighting", nbPokemons: dataToUpdate.pokemonsPerType.Fighting.length },
+        { Type1: "Poison", nbPokemons: dataToUpdate.pokemonsPerType.Poison.length },
+        { Type1: "Bug", nbPokemons: dataToUpdate.pokemonsPerType.Bug.length },
+        { Type1: "Flying", nbPokemons: dataToUpdate.pokemonsPerType.Flying.length },
+        { Type1: "Ice", nbPokemons: dataToUpdate.pokemonsPerType.Ice.length },
+        { Type1: "Dark", nbPokemons: dataToUpdate.pokemonsPerType.Dark.length },
+        { Type1: "Fire", nbPokemons: dataToUpdate.pokemonsPerType.Fire.length },
+        { Type1: "Dragon", nbPokemons: dataToUpdate.pokemonsPerType.Dragon.length },
+        { Type1: "Fairy", nbPokemons: dataToUpdate.pokemonsPerType.Fairy.length },
+        { Type1: "Steel", nbPokemons: dataToUpdate.pokemonsPerType.Steel.length }
     ]
 
     console.log(nbPerElements)
 
     //Dimensions du svgs montrant les forces et les faiblesses
     const margin = { top: 10, right: 40, bottom: 10, left: 40 };
-    const nbParTypeWidth = screen.width  - margin.left - margin.right;
+    const nbParTypeWidth = screen.width - margin.left - margin.right;
     const nbParTypeHeight = screen.width * 3 / 5 - margin.top - margin.bottom;
 
 
     //Dessin du svg
     //Effacement de l'ancienne d'éléments
     d3.select('.nb-par-type-drawn').remove()
+    d3.select('.nb-par-type-text-drawn').remove()
     let nbParTypeSvg = d3.select('.nb-par-type-svg');
     // console.log(nbParTypeSvg)
     nbParTypeSvg.attr("width", nbParTypeWidth + margin.left + margin.right)
         .attr("height", nbParTypeHeight + margin.top + margin.bottom)
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     let groupeNbParType = nbParTypeSvg.append('g').attr('class', 'np-par-type-drawn')
+    let groupNbParTypeText = nbParTypeSvg.append('g').attr('class', 'np-par-type-text-drawn')
 
 
     //Dessin de barres représentant le nombre de pokemons par type:
-     groupeNbParType.selectAll("nbParType")
-     .data(nbPerElements)
-     //console.log("posts user1", users[1].posts.length)
-     .enter()
-     .append("rect")
-     .attr("height", (d) => d.nbPokemons * 10)
-     .attr("width", 35)
-     .attr("class", d => d.Type1)
-     .attr("fill", d => chooseColorDisplayOnType(d))
-     .attr("x", (d, i) => i * 25 + 30*i)
-     .attr("y", d =>  nbParTypeHeight - d.nbPokemons * 10 )
+    groupeNbParType.selectAll("nbParType")
+        .data(nbPerElements)
+        //console.log("posts user1", users[1].posts.length)
+        .enter()
+        .append("rect")
+        .attr("height", (d) => d.nbPokemons * 10)
+        .attr("width", 35)
+        .attr("class", d => d.Type1)
+        .attr("fill", d => chooseColorDisplayOnType(d))
+        .attr("x", (d, i) => i * 25 + 30 * i)
+        .attr("y", d => nbParTypeHeight - d.nbPokemons * 10)
+        .attr("transform", "translate(120, 10)")
 
 
-    
+    //Dessin de texte représentant l'élément à l'intérieur de chaque barre
+    groupNbParTypeText.selectAll('text')
+        .data(nbPerElements)
+        .join(enter => enter.append('text')
+        .attr("x", (d, i) => i * 25 + 30 * i)
+        .attr("y", d => nbParTypeHeight + 10)
+            .attr("font-size", 14)
+            .attr("font-family", "Calibri")
+            .attr("font-weight", "bold")
+            .attr("class", "elementText")
+            .attr("fill", "Black")
+            .text(d => d.Type1.length > 10 ? d.Type1.slice(0, 9) : d.Type1)
+            .attr('data-type', (d) => `${d.Type1}`)
+            .attr("transform", "translate(120, 10)")
+        )
+
+
+        //Tentative de rotation des texts
+        // d3.selectAll('.elementText').attr('transform',function(d, i){
+        //     let me = d
+        //     console.log("me",me, i)
+        //     let x1 = (i * 20) + (30 * i);//the center x about which you want to rotate
+        //     let y1 = nbParTypeHeight - d.nbPokemons * 5;//the center y about which you want to rotate
+        //     return `rotate(-90, ${x1}, ${y1})`;//rotate 90 degrees about x and y
+        // })
+
+    //Dessin des axes
+    //axe x 
+    const x = d3.scaleLinear()
+    .domain([0, 1000])
+    .range([0, nbParTypeWidth])
+
+    nbParTypeSvg.append('g')
+        .call(d3.axisBottom(x))
+        .attr('class', "xAxis")
+        .attr("transform", `translate(100,${nbParTypeHeight + 10})`)
+
+    const y = d3.scaleLinear()
+        .domain([0, 120])
+        .range([nbParTypeHeight, 0])
+
+    //axe y
+    nbParTypeSvg.append('g')
+        .call(d3.axisLeft(y))
+        .attr('class', "yAxis")
+        .attr("transform", "translate(100, 10)")
+
+    //Titre axe x
+    nbParTypeSvg.append('text')
+        .attr("class", "xAxisTitle")
+        .text("Number of pokemons per type")
+        .attr("transform", "translate(300, 420)")
+
+    //Titre axe y
+    nbParTypeSvg.append('text')
+        .attr("class", "yAxisTitle")
+        .text("Element concerned")
+        .attr("transform", "translate(100, 10)")
+
 }
 
 // On link la fonction "displaySection" à l'événement hashchange pour être averti d'un changement de hash dans l'url
