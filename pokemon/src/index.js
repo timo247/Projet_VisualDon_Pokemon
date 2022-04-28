@@ -605,12 +605,7 @@ function drawPokemonsParType(fetchedData) {
     //axe x 
     const x = d3.scaleLinear()
         .domain([0, 1000])
-
-    // let ordinal = d3.scaleOrdinal()
-    //     .domain([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18])
-    //     .range(['Ghost', 'Grass', 'Ground', 'Rock', 'Psychic', 'Water', 'Electric', 'Normal', 'Fighting', 'Poison', 'Bug', 'Flying', 'Ice', 'Dark', 'Fire', 'Dragon', 'Fairy']);
-
-    console.log("scaleOrdinal", ordinal(2))
+        
     nbParTypeSvg.append('g')
         .call(d3.axisBottom(x))
         .attr('class', "xAxis")
