@@ -220,6 +220,7 @@ function displaySection(fetchedData) {
             });
             document.querySelector('.schema-elements').classList.add('active');
             document.querySelector('.schema-elements').classList.remove('hidden');
+            drawSchemaElements();
             break;
 
         case '#pokemons-par-type':
@@ -418,7 +419,7 @@ function drawForcesFaiblessesData(fetchedData, elementToDisplay) {
         .attr("height", forcesFaiblessesHeight + margin.top + margin.bottom)
         .attr("font-size", 14)
         .attr("font-family", "Calibri")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        .attr("transform", "translate(" + margin.left + "," + (-30) + ")");
     let groupeForcesFaiblesses = forcesFaiblessesSvg.append('g').attr('class', 'forces-faiblesses-drawn')
 
 
@@ -460,7 +461,7 @@ function drawForcesFaiblessesData(fetchedData, elementToDisplay) {
     groupeForcesFaiblesses.selectAll("forcesEtFaiblessesList")
         .data(selectedType[0].Type1)
         .join(enter => enter
-            .append("text").attr("class", "faiblessesHeader").attr("width", "400").attr("y", 280).attr("x", 54).attr("font-size", 18)
+            .append("text").attr("class", "faiblessesHeader").attr("width", "400").attr("y", 380).attr("x", 54).attr("font-size", 18)
             .attr("font-family", "Calibri")
             .text(d => `Element ${selectedType[0].Type1} is strong against`)
         )
@@ -474,7 +475,7 @@ function drawForcesFaiblessesData(fetchedData, elementToDisplay) {
             .attr("font-family", "Calibri")
             .attr("font-weight", "bold")
             .attr("x", (d, i) => { if (i % 3 == 0) { colForcesFaiblesses = 0; console.log("colCircle", colForcesFaiblesses) } else { colForcesFaiblesses++ } return (colForcesFaiblesses * 160 - 40) })
-            .attr("y", (d, i) => { if (i % 3 == 0) { lineForcesFaiblesses++; } return (lineForcesFaiblesses * 100 + 266) })
+            .attr("y", (d, i) => { if (i % 3 == 0) { lineForcesFaiblesses++; } return (lineForcesFaiblesses * 100 + 366) })
             .attr("class", "elementForceFaiblesse")
             .style("fill", d => { let obj = { Type1: d }; return chooseColorDisplayOnType(obj) })
             .attr("transform", "translate(100, 10)")
@@ -581,7 +582,7 @@ function drawPokemonsParType(fetchedData) {
 
     //Dimensions du svgs montrant les forces et les faiblesses
     const margin = { top: 10, right: 40, bottom: 10, left: 40 };
-    const nbParTypeWidth = screen.width - margin.left - margin.right;
+    const nbParTypeWidth = screen.width - margin.left - margin.right - screen.width * 0.2;
     const nbParTypeHeight = screen.width * 3 / 5 - margin.top - margin.bottom;
 
 
@@ -596,7 +597,40 @@ function drawPokemonsParType(fetchedData) {
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     let groupeNbParType = nbParTypeSvg.append('g').attr('class', 'np-par-type-drawn')
     let groupNbParTypeText = nbParTypeSvg.append('g').attr('class', 'np-par-type-text-drawn')
+    // console.log("nbPerElements", nbPerElements)
 
+
+
+    //Dessin des axes
+    const xscale = d3.scaleThreshold()
+    .domain([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18])
+    .range(['Ghost', 'Grass', 'Ground', 'Rock', 'Psychic', 'Water', 'Electric', 'Normal', 'Fighting', 'Poison', 'Bug', 'Flying', 'Ice', 'Dark', 'Fire', 'Dragon', 'Fairy']);
+
+    let x_axis = d3.axisBottom().scale(xscale).ticks(5);
+
+    //axe x 
+    const x = d3.scaleLinear()
+        .domain([0, 1000])
+
+    let ordinal = d3.scaleOrdinal()
+        .domain([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18])
+        .range(['Ghost', 'Grass', 'Ground', 'Rock', 'Psychic', 'Water', 'Electric', 'Normal', 'Fighting', 'Poison', 'Bug', 'Flying', 'Ice', 'Dark', 'Fire', 'Dragon', 'Fairy']);
+
+    console.log("scaleOrdinal", ordinal(2))
+    nbParTypeSvg.append('g')
+        .call(d3.axisBottom(x))
+        .attr('class', "xAxis")
+        .attr("transform", `translate(100,${nbParTypeHeight + 10})`)
+
+    const y = d3.scaleLinear()
+        .domain([0, 112])
+        .range([nbParTypeHeight, 0])
+
+    //axe y
+    nbParTypeSvg.append('g')
+        .call(d3.axisLeft(y))
+        .attr('class', "yAxis")
+        .attr("transform", "translate(100, 10)")
 
     //Dessin de barres représentant le nombre de pokemons par type:
     groupeNbParType.selectAll("nbParType")
@@ -609,7 +643,7 @@ function drawPokemonsParType(fetchedData) {
         .attr("class", d => d.Type1)
         .attr("fill", d => chooseColorDisplayOnType(d))
         .attr("x", (d, i) => i * 25 + 30 * i)
-        .attr("y", d => nbParTypeHeight - d.nbPokemons * 10)
+        .attr("y", d => y(d.nbPokemons))
         .attr("transform", "translate(120, 10)")
 
 
@@ -617,61 +651,42 @@ function drawPokemonsParType(fetchedData) {
     groupNbParTypeText.selectAll('text')
         .data(nbPerElements)
         .join(enter => enter.append('text')
-        .attr("x", (d, i) => i * 25 + 30 * i)
-        .attr("y", d => nbParTypeHeight + 10)
+            .attr("x", (d, i) => i * 25 + 30 * i)
+            .attr("y", d => nbParTypeHeight + 10)
             .attr("font-size", 14)
             .attr("font-family", "Calibri")
             .attr("font-weight", "bold")
             .attr("class", "elementText")
-            .attr("fill", "Black")
+            .attr("fill", d => (d.Type1 != "Ghost")? "Black": "White")
             .text(d => d.Type1.length > 10 ? d.Type1.slice(0, 9) : d.Type1)
             .attr('data-type', (d) => `${d.Type1}`)
             .attr("transform", "translate(120, 10)")
         )
 
 
-        //Tentative de rotation des texts
-        // d3.selectAll('.elementText').attr('transform',function(d, i){
-        //     let me = d
-        //     console.log("me",me, i)
-        //     let x1 = (i * 20) + (30 * i);//the center x about which you want to rotate
-        //     let y1 = nbParTypeHeight - d.nbPokemons * 5;//the center y about which you want to rotate
-        //     return `rotate(-90, ${x1}, ${y1})`;//rotate 90 degrees about x and y
-        // })
+    //Tentative de rotation des texts
+    // d3.selectAll('.elementText').attr('transform',function(d, i){
+    //     let me = d
+    //     console.log("me",me, i)
+    //     let x1 = (i * 20) + (30 * i);//the center x about which you want to rotate
+    //     let y1 = nbParTypeHeight - d.nbPokemons * 5;//the center y about which you want to rotate
+    //     return `rotate(-90, ${x1}, ${y1})`;//rotate 90 degrees about x and y
+    // })
 
-    //Dessin des axes
-    //axe x 
-    const x = d3.scaleLinear()
-    .domain([0, 1000])
-    .range([0, nbParTypeWidth])
 
-    nbParTypeSvg.append('g')
-        .call(d3.axisBottom(x))
-        .attr('class', "xAxis")
-        .attr("transform", `translate(100,${nbParTypeHeight + 10})`)
+}
 
-    const y = d3.scaleLinear()
-        .domain([0, 120])
-        .range([nbParTypeHeight, 0])
 
-    //axe y
-    nbParTypeSvg.append('g')
-        .call(d3.axisLeft(y))
-        .attr('class', "yAxis")
-        .attr("transform", "translate(100, 10)")
-
-    //Titre axe x
-    nbParTypeSvg.append('text')
-        .attr("class", "xAxisTitle")
-        .text("Number of pokemons per type")
-        .attr("transform", "translate(300, 420)")
-
-    //Titre axe y
-    nbParTypeSvg.append('text')
-        .attr("class", "yAxisTitle")
-        .text("Element concerned")
-        .attr("transform", "translate(100, 10)")
-
+function drawSchemaElements(){
+    console.log("dessine schema");
+    let htmlList = document.querySelector('select');
+    dataToUpdate.pokemonsPerType.forEach(element => {
+        if(element.Type1 != "Fairy" && element.Type1 != "Bug"){
+            let option = document.createElement(option);
+            option.setAttribute("value", element.Type1);
+            htmlList.append(option);
+        }
+    });
 }
 
 // On link la fonction "displaySection" à l'événement hashchange pour être averti d'un changement de hash dans l'url
