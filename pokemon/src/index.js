@@ -601,20 +601,14 @@ function drawPokemonsParType(fetchedData) {
 
 
 
-    //Dessin des axes
-    const xscale = d3.scaleThreshold()
-    .domain([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18])
-    .range(['Ghost', 'Grass', 'Ground', 'Rock', 'Psychic', 'Water', 'Electric', 'Normal', 'Fighting', 'Poison', 'Bug', 'Flying', 'Ice', 'Dark', 'Fire', 'Dragon', 'Fairy']);
-
-    let x_axis = d3.axisBottom().scale(xscale).ticks(5);
 
     //axe x 
     const x = d3.scaleLinear()
         .domain([0, 1000])
 
-    let ordinal = d3.scaleOrdinal()
-        .domain([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18])
-        .range(['Ghost', 'Grass', 'Ground', 'Rock', 'Psychic', 'Water', 'Electric', 'Normal', 'Fighting', 'Poison', 'Bug', 'Flying', 'Ice', 'Dark', 'Fire', 'Dragon', 'Fairy']);
+    // let ordinal = d3.scaleOrdinal()
+    //     .domain([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18])
+    //     .range(['Ghost', 'Grass', 'Ground', 'Rock', 'Psychic', 'Water', 'Electric', 'Normal', 'Fighting', 'Poison', 'Bug', 'Flying', 'Ice', 'Dark', 'Fire', 'Dragon', 'Fairy']);
 
     console.log("scaleOrdinal", ordinal(2))
     nbParTypeSvg.append('g')
@@ -678,15 +672,40 @@ function drawPokemonsParType(fetchedData) {
 
 
 function drawSchemaElements(){
+    //Generate pokemon types dynamically
+    const pokeTypes = ['Ghost', 'Grass', 'Ground', 'Rock', 'Psychic', 'Water', 'Electric', 'Normal', 'Fighting', 'Poison', 'Bug', 'Flying', 'Ice', 'Dark', 'Fire', 'Dragon', 'Fairy']
     console.log("dessine schema");
     let htmlList = document.querySelector('select');
-    dataToUpdate.pokemonsPerType.forEach(element => {
-        if(element.Type1 != "Fairy" && element.Type1 != "Bug"){
-            let option = document.createElement(option);
-            option.setAttribute("value", element.Type1);
+    console.log(htmlList, dataToUpdate.pokemonsPerType)
+    pokeTypes.forEach(element => {
+        if(element != "Fairy" && element != "Bug"){
+            let option = document.createElement('option');
+            option.textContent = element;
+            option.setAttribute("value", element);
+            option.setAttribute("data-element", element)
             htmlList.append(option);
         }
     });
+
+    //Dessin du schema
+    let svg = d3.select('.schema-element-svg')
+    .attr('width', window.innerWidth * 0.75)
+    .attr('height', window.innerWidth * 0.75)
+
+    let schema = svg.append('image')
+    .attr("class", "dynamic-schema")
+    .attr('href', './img/Pikachu.svg')
+    .attr('width', window.innerWidth * 0.75)
+    .attr('height', window.innerWidth * 0.75)
+
+    //Dessin du schema selon l'attribu sélectionné:
+    console.log(htmlList.children)
+    htmlList.addEventListener("click", e => {
+            console.log('select')
+            let selectedElement = e.target.value;
+            let imageSrc = `./img/types-svg/${selectedElement}.svg`;
+            document.querySelector(".dynamic-schema").setAttribute("href", imageSrc);
+        })      
 }
 
 // On link la fonction "displaySection" à l'événement hashchange pour être averti d'un changement de hash dans l'url
