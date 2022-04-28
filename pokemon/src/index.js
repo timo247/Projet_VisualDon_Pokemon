@@ -2,21 +2,6 @@ import * as d3 from 'd3'
 import { csv, json } from 'd3-fetch'
 
 
-// Pour importer les données
-// import file from '../data/data.csv'
-//console.log("pikachu")
-//Récipération des données
-/*
-Promise.all([
-    json('pokemon\data\donnes-pokemon.json'),
-]).then(([data]) =>{
-    console.log("datapok", pokemon)
-})
-*/
-
-
-
-let seasonSelected = false;
 let dataToUpdate = { pokemonsPerType: [] }
 
 
@@ -25,8 +10,6 @@ function fetchData() {
     let season2Pokemons = [];
     let season3Pokemons = [];
     let season4Pokemons = [];
-
-    let elementsSchema = NaN
 
     d3.json('../donnees-pokemon.json')
         .then(function (data) {
@@ -110,8 +93,6 @@ function fetchData() {
                 }
             });
 
-
-
             dataToUpdate.pokemonsPerType = {
                 Dragon: dragonPokemons,
                 Grass: grassPokemons,
@@ -132,9 +113,6 @@ function fetchData() {
                 Fighting: fightingPokemons,
                 Rock: rockPokemons
             }
-
-            // console.log(pokemonsPerType)
-
 
             //Regrouppement des données dans un objet pour faciliter son utilisation
             let orderedDatas = {}
@@ -220,6 +198,8 @@ function displaySection(fetchedData) {
             });
             document.querySelector('.schema-elements').classList.add('active');
             document.querySelector('.schema-elements').classList.remove('hidden');
+
+
             drawSchemaElements();
             break;
 
@@ -235,6 +215,8 @@ function displaySection(fetchedData) {
             });
             document.querySelector('.pokemons-par-type').classList.add('active');
             document.querySelector('.pokemons-par-type').classList.remove('hidden');
+
+
             drawPokemonsParType(fetchedData);
             break;
 
