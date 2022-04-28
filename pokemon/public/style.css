@@ -19,7 +19,7 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #9cf588;
+    /*background-color: #9cf588;*/
 }
 
 #barrePokemon li {
@@ -27,18 +27,58 @@
     display: inline;
 }
 
-#barrePokemon li:hover {
+/*#barrePokemon li:hover {
     background-color: #0066ff;
 }
 
 #barrePokemon.active {
     background-color: #ff00aa;
 }
+*/
 
 #PSsaison {
-     
+     display: block;
+     padding: 25px;
+     width: 180px;
+     background-image: url(./img/casquetteSacha.png);
+     background-repeat: no-repeat;
+     background-color: #C2B9AC;
+     background-size: 3em; 
+     background-position: left center;
+     transition: 440ms;
 }
 
+#home {
+   padding: 0 0 0 15%;
+    color: red;
+}
+
+#PSsaison:hover {
+    display:block;
+    transition: 440ms;
+    background-color: #A0988D;   
+}
+
+#JP {
+    display:block;
+    padding: 25px;
+    width: 180px;
+    background-image: url(./img/casquetteSacha.png);
+    background-repeat: no-repeat;
+    background-color: pink;
+    background-size: 3em;
+    background-position: center;
+    transition: 440ms;
+}
+#JP:hover {
+    display:block;
+    transition: 440ms;
+    background-color: purple;   
+}
+
+.maPageSelected {
+    background-color: red
+}
 /*----------------------------------------------------------*/
 
 body {
