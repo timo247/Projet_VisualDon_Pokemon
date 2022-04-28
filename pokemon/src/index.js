@@ -604,7 +604,6 @@ function drawPokemonsParType(fetchedData) {
             .attr("transform", "translate(120, 10)")
         )
 
-
     //Tentative de rotation des texts
     // d3.selectAll('.elementText').attr('transform',function(d, i){
     //     let me = d
@@ -613,12 +612,11 @@ function drawPokemonsParType(fetchedData) {
     //     let y1 = nbParTypeHeight - d.nbPokemons * 5;//the center y about which you want to rotate
     //     return `rotate(-90, ${x1}, ${y1})`;//rotate 90 degrees about x and y
     // })
-
-
 }
 
 
 function drawSchemaElements(){
+
     //Generate pokemon types dynamically
     const pokeTypes = ['Ghost', 'Grass', 'Ground', 'Rock', 'Psychic', 'Water', 'Electric', 'Normal', 'Fighting', 'Poison', 'Bug', 'Flying', 'Ice', 'Dark', 'Fire', 'Dragon', 'Fairy']
     console.log("dessine schema");
@@ -652,6 +650,9 @@ function drawSchemaElements(){
             let selectedElement = e.target.value;
             let imageSrc = `./img/types-svg/${selectedElement}.svg`;
             document.querySelector(".dynamic-schema").setAttribute("href", imageSrc);
+
+                //Change de titre
+    document.querySelector(".schema-element-name").textContent=`${selectedElement} element`
         })      
 }
 

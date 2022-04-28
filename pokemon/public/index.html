@@ -34,7 +34,7 @@
      
       <body>
         <section class="resume active">
-          <h2 id="titrePage">Liste des pokemons par saison</h2>
+          <h2 id="titrePage">List of pokemons per season</h2>
           <div class="resume-wrapper">
             <svg class="resume-svg"></svg> 
             <div class="resume-season-selection">
@@ -50,8 +50,8 @@
         </section>
 
         <section class="forces-faiblesses hidden">
-          <h1>Forces et faiblesses des différents éléments</h1>
-          <span>Cliquez sur un élément pour en voir apparaître les forces et faiblesses</span>
+          <h1>List of strengths and weaknesses of all elements</h1>
+          <span>Click on element circles to show their strenghts and weaknesses</span>
           <div class="forces-faiblesses-wrapper">
             <svg class="forces-faiblesses-svg"></svg>  
             <svg class ="liste-elements-svg"></svg>          
@@ -62,9 +62,11 @@
 
 
         <section class="schema-elements  hidden">
+          <h1>Schema showing strenghts of selected elements toward others</h1>
+          <h2 class="schema-element-name"></h2>
+          <select name="type" id="type">
+          </select>
             <div class="schema-elements-wrapper">
-              <select name="type" id="type">
-              </select>
               <svg class="schema-element-svg"></svg>       
             </div>
             <a href="#pokemons-par-type">Next</a>
@@ -72,12 +74,12 @@
         </section>
 
         <section class="pokemons-par-type hidden">
-          <h1>Nombre de pokemons par type</h1>
-          <h2>Nombre de pokemons</h2>
+          <h1>Number of pokemons classed by their type</h1>
+          <h2>Number of pokemons</h2>
           <div class="pokemons-par-type-wrapper">
             <svg class="nb-par-type-svg"></svg>  
           </div>
-          <h2 style=" display: flex; justify-content:center;">Elément concerné</h2>
+          <h2 style=" display: flex; justify-content:center;">Concerned element</h2>
           <a href="#combat">Next</a>   
           <a href="#schema-elements">Previous</a>   
         </section>
