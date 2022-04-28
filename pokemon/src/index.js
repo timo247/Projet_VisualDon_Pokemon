@@ -17,17 +17,15 @@ Promise.all([
 
 
 let seasonSelected = false;
+let dataToUpdate = { pokemonsPerType: [] }
+
 
 function fetchData() {
-
-    let pokemonsPerSeason = [];
     let season1Pokemons = [];
     let season2Pokemons = [];
     let season3Pokemons = [];
     let season4Pokemons = [];
-    let season5Pokemons = [];
-    let season6Pokemons = [];
-    let pokemonsPerType = []
+
     let elementsSchema = NaN
 
     d3.json('../donnees-pokemon.json')
@@ -64,6 +62,8 @@ function fetchData() {
             let rockPokemons = []
             let poisonPokemons = []
             let flyingPokemons = []
+            let steelPokemons = []
+            let fairyPokemons = []
 
             data.forEach(pokemon => {
                 if (pokemon.Type1 == "Ghost") {
@@ -103,8 +103,37 @@ function fetchData() {
                     firePokemons.push(pokemon)
                 } else if (pokemon.Type1 == "Dragon") {
                     dragonPokemons.push(pokemon)
+                } else if (pokemon.Type1 == "Steel") {
+                    steelPokemons.push(pokemon)
+                } else if (pokemon.Type1 == "Fairy") {
+                    fairyPokemons.push(pokemon)
                 }
             });
+
+
+
+            dataToUpdate.pokemonsPerType = {
+                Dragon: dragonPokemons,
+                Grass: grassPokemons,
+                Fire: firePokemons,
+                Ice: icePokemons,
+                Dark: darkPokemons,
+                Ghost: ghostPokemons,
+                Steel: steelPokemons,
+                Electric: electricPokemons,
+                Ground: groundPokemons,
+                Bug: bugPokemons,
+                Fairy: fairyPokemons,
+                Water: waterPokemons,
+                Flying: flyingPokemons,
+                Normal: normalPokemons,
+                Psychic: psychicPokemons,
+                Poison: poisonPokemons,
+                Fighting: fightingPokemons,
+                Rock: rockPokemons
+            }
+
+            // console.log(pokemonsPerType)
 
 
             //Regrouppement des données dans un objet pour faciliter son utilisation
@@ -121,7 +150,7 @@ function fetchData() {
             displaySection(orderedDatas);
         })
         .catch(function (error) {
-            console.log(error);
+            // console.log(error);
         })
 }
 
@@ -176,7 +205,7 @@ function displaySection(fetchedData) {
             document.querySelector('.forces-faiblesses').classList.remove('hidden');
 
 
-            drawForcesFaiblessesData(fetchedData)
+            drawForcesFaiblessesData(fetchedData, "Fire")
             break;
 
         case '#schema-elements':
@@ -191,6 +220,7 @@ function displaySection(fetchedData) {
             });
             document.querySelector('.schema-elements').classList.add('active');
             document.querySelector('.schema-elements').classList.remove('hidden');
+            drawSchemaElements();
             break;
 
         case '#pokemons-par-type':
@@ -205,6 +235,7 @@ function displaySection(fetchedData) {
             });
             document.querySelector('.pokemons-par-type').classList.add('active');
             document.querySelector('.pokemons-par-type').classList.remove('hidden');
+            drawPokemonsParType(fetchedData);
             break;
 
         case '#combat':
@@ -226,6 +257,7 @@ function displaySection(fetchedData) {
 
 
 function chooseColorDisplayOnType(pokemon) {
+    // console.log("ChooseColor", pokemon)
     if (pokemon.Type1 == "Ghost") {
         return "black";
     } else if (pokemon.Type1 == "Grass") {
@@ -261,6 +293,10 @@ function chooseColorDisplayOnType(pokemon) {
         return "DarkOrange"
     } else if (pokemon.Type1 == "Dragon") {
         return "LightCoral"
+    } else if (pokemon.Type1 == "Fairy") {
+        return "MistyRose"
+    } else if (pokemon.Type1 == "Steel") {
+        return "SlateGrey"
     }
 }
 
@@ -268,15 +304,15 @@ function deleteSvgEls() {
     //Effacement de l'ensemble des éléments dessinés précédemment dans les svg
 
     let svgEls = document.querySelectorAll('svg')
-    console.log("delete")
+    // console.log("delete")
     svgEls.forEach(svgEl => {
         let svgChidlren = svgEl.childNodes
         //console.log(svgChidlren)
         svgChidlren.forEach(element => {
             let parent = element.parentNode;
-            console.log("deleted", parent)
+            // console.log("deleted", parent)
             element.remove();
-            console.log(element)
+            // console.log(element)
         });
     });
 }
@@ -339,10 +375,10 @@ function drawResumeDatas(orderedDatas, currentSeason) {
 }
 
 
-function drawForcesFaiblessesData(fetchedData) {
+function drawForcesFaiblessesData(fetchedData, elementToDisplay) {
     //Dimensions du svgs montrant les forces et les faiblesses
     const margin = { top: 10, right: 40, bottom: 10, left: 40 };
-    const forcesFaiblessesWidth = screen.width / 2 - margin.left - margin.right ;
+    const forcesFaiblessesWidth = screen.width / 2 - margin.left - margin.right;
     const forcesFaiblessesHeight = screen.width * 4 / 5 - margin.top - margin.bottom;
 
     //Dimensions du svg montrant listant les types
@@ -354,44 +390,111 @@ function drawForcesFaiblessesData(fetchedData) {
     //chaque type dans un objet avec la liste des forces et des faiblesses
     //Afin de gagner du temps, la propriété type est changée en Type1 pour pouvoir par la suite utiliser chooseDisplayColorOnType
     const elements = [
-        {Type1: "Ghost", weaknesses: [], strengths: []},
-        {Type1: "Grass", weaknesses: [], strengths: []},
-        {Type1: "Ground", weaknesses: [], strengths: []},
-        {Type1: "Rock", weaknesses: [], strengths: []},
-        {Type1: "Psychic", weaknesses: [], strengths: []},
-        {Type1: "Water", weaknesses: [], strengths: []},
-        {Type1: "Electric", weaknesses: [], strengths: []},
-        {Type1: "Normal", weaknesses: [], strengths: []},
-        {Type1: "Fighting", weaknesses: [], strengths: []},
-        {Type1: "Poison", weaknesses: [], strengths: []},
-        {Type1: "Bug", weaknesses: [], strengths: []},
-        {Type1: "Flying", weaknesses: [], strengths: []},
-        {Type1: "Ice", weaknesses: [], strengths: []},
-        {Type1: "Dark", weaknesses: [], strengths: []},
-        {Type1: "Fire", weaknesses: [], strengths: []},
-        {Type1: "Dragon", weaknesses: [], strengths: []}
+        { Type1: "Ghost", weaknesses: ["Dark"], strengths: ["Psychic", "Ghost"] },
+        { Type1: "Grass", weaknesses: ["Fire", "Grass", "Poison", "Flying", "Bug", "Dragon", "Steel"], strengths: ["Water", "Ground", "Rock"] },
+        { Type1: "Ground", weaknesses: ["Grass", "Bug"], strengths: ["Fire", "Electric", "Rock", "Poison", "Steel"] },
+        { Type1: "Rock", weaknesses: ["Fighting", "Ground", "Steel"], strengths: ["Fire", "Electric", "Flyinf", "Bug"] },
+        { Type1: "Psychic", weaknesses: ["Psychic", "Steel"], strengths: ["Fighting", "Poison"] },
+        { Type1: "Water", weaknesses: ["Water", "Grass", "Dragon"], strengths: ["Fire", "Ground", "Rock"] },
+        { Type1: "Electric", weaknesses: ["Grass", "Electric", "Dragon"], strengths: ["Water", "Flying"] },
+        { Type1: "Normal", weaknesses: ["Rock", "Steel"], strengths: [] },
+        { Type1: "Fighting", weaknesses: ["poison", "Flying", "Psychic", "Fairy"], strengths: ["Normal", "Ice", "Rock", "Dark", "Steel"] },
+        { Type1: "Poison", weaknesses: ["Poison", "Rock", "Ground", "Ghost"], strengths: ["Grass", "Fairy"] },
+        { Type1: "Bug", weaknesses: ["Fire", "Flying", "Poison", "Fighting", "Rock", "Steel", "Fairy"], strengths: ["Grass", "Psychic", "Dark"] },
+        { Type1: "Flying", weaknesses: ["Electric", "Rock", "Steel"], strengths: ["Grass", "Fighting", "Bug"] },
+        { Type1: "Ice", weaknesses: ["Fire", "Water", "Ice", "Steel"], strengths: ["Ice", "Ground", "Flying", "Dragon"] },
+        { Type1: "Dark", weaknesses: ["Fighting"], strengths: ["Dark", "Fairy"] },
+        { Type1: "Fire", weaknesses: ["Fire", "Water", "Rock"], strengths: ["Grass", "Ice"] },
+        { Type1: "Dragon", weaknesses: ["Steel"], strengths: ["Dragon"] },
+        { Type1: "Fairy", weaknesses: ["Fire", "Poison"], strengths: ["Fighting", "Ghost", "Dragon"] },
+        { Type1: "Steel", weaknesses: ["Fire", "Water", "Electric", "Steel"], strengths: ["Ice", "Ghost", "Dragon"] }
     ]
 
 
-    
+    //Ecran forces et faiblesses  
     //Effacement des ancienns forces et faiblesses
-    d3.select('.forces-faiblesses-drawn').remove() 
+    d3.select('.forces-faiblesses-drawn').remove()
     let forcesFaiblessesSvg = d3.select('.forces-faiblesses-svg');
     forcesFaiblessesSvg.attr("width", forcesFaiblessesWidth + margin.left + margin.right)
         .attr("height", forcesFaiblessesHeight + margin.top + margin.bottom)
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        .attr("font-size", 14)
+        .attr("font-family", "Calibri")
+        .attr("transform", "translate(" + margin.left + "," + (-30) + ")");
     let groupeForcesFaiblesses = forcesFaiblessesSvg.append('g').attr('class', 'forces-faiblesses-drawn')
 
 
+    //Faiblesses
+    let selectedType = elements.filter(el => el.Type1 == elementToDisplay);
+    // console.log("selectedType", selectedType[0].Type1)
+    groupeForcesFaiblesses.selectAll("forcesEtFaiblessesList")
+        .data(selectedType[0].Type1)
+        .join(enter => enter
+            .append("text").attr("class", "faiblessesHeader").attr("width", "400").attr("y", 100).attr("x", 54)
+            .attr("font-size", 18)
+            .attr("font-family", "Calibri")
+            .text(d => `Element ${selectedType[0].Type1} is weak against`)
+        )
+
+
+
+
+    let colForcesFaiblesses = 0;
+    let lineForcesFaiblesses = 0;
+    groupeForcesFaiblesses.selectAll("forcesEtFaiblessesList")
+        .data(selectedType[0].weaknesses)
+        .join(enter => enter
+            .append("text")
+            .attr("font-size", 14)
+            .attr("font-family", "Calibri")
+            .attr("font-weight", "bold")
+            .attr("x", (d, i) => { if (i % 3 == 0) { colForcesFaiblesses = 0; console.log("colCircle", colForcesFaiblesses) } else { colForcesFaiblesses++ } return (colForcesFaiblesses * 160 - 40) })
+            .attr("y", (d, i) => { if (i % 3 == 0) { lineForcesFaiblesses++; } return (lineForcesFaiblesses * 100 + 66) })
+            .attr("class", "elementForceFaiblesse")
+            .style("fill", d => { let obj = { Type1: d }; return chooseColorDisplayOnType(obj) })
+            .attr("transform", "translate(100, 10)")
+            .attr('data-type', (d) => `${d}`)
+            .text(d => d.length > 10 ? d.slice(0, 9) : d)
+        )
+
+
+    //Forces
+    groupeForcesFaiblesses.selectAll("forcesEtFaiblessesList")
+        .data(selectedType[0].Type1)
+        .join(enter => enter
+            .append("text").attr("class", "faiblessesHeader").attr("width", "400").attr("y", 380).attr("x", 54).attr("font-size", 18)
+            .attr("font-family", "Calibri")
+            .text(d => `Element ${selectedType[0].Type1} is strong against`)
+        )
+    colForcesFaiblesses = 0;
+    lineForcesFaiblesses = 0;
+    groupeForcesFaiblesses.selectAll("forcesEtFaiblessesList")
+        .data(selectedType[0].strengths)
+        .join(enter => enter
+            .append("text")
+            .attr("font-size", 14)
+            .attr("font-family", "Calibri")
+            .attr("font-weight", "bold")
+            .attr("x", (d, i) => { if (i % 3 == 0) { colForcesFaiblesses = 0; console.log("colCircle", colForcesFaiblesses) } else { colForcesFaiblesses++ } return (colForcesFaiblesses * 160 - 40) })
+            .attr("y", (d, i) => { if (i % 3 == 0) { lineForcesFaiblesses++; } return (lineForcesFaiblesses * 100 + 366) })
+            .attr("class", "elementForceFaiblesse")
+            .style("fill", d => { let obj = { Type1: d }; return chooseColorDisplayOnType(obj) })
+            .attr("transform", "translate(100, 10)")
+            .attr('data-type', (d) => `${d}`)
+            .text(d => d.length > 10 ? d.slice(0, 9) : d)
+        )
+
+
+
+    //liste des éléments
     //Effacement de l'ancienne d'éléments
-    d3.select('.elements-list-drawn').remove() 
+    d3.select('.elements-list-drawn').remove()
     let listeElementsSvg = d3.select('.liste-elements-svg');
     listeElementsSvg.attr("width", ElementsListWidth + margin.left + margin.right)
         .attr("height", ElementsListHeight + margin.top + margin.bottom)
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     let groupeElementsList = listeElementsSvg.append('g').attr('class', 'elements-list-drawn')
 
-    //Création de cercles  pour chacun des types dont la couleur dépend du type du pokemon
+    //Création de cercles  pour chacun des types dont la couleur dépend du type du pokemon accompagné de son titre
     let lineCircle = 0;
     let colCircle = 0;
     groupeElementsList.selectAll("elementsList")
@@ -402,9 +505,11 @@ function drawForcesFaiblessesData(fetchedData) {
             //affichage des cercles en ligne
             .attr("cy", (d, i) => { if (i % 3 == 0) { lineCircle++; } return (lineCircle * 100 - 34) })
             .attr("r", d => 34)
-            .style("fill", d => chooseColorDisplayOnType(d))
+            .attr("class", "elementCircle")
+            .attr("fill", d => chooseColorDisplayOnType(d))
             .attr("transform", "translate(100, 10)")
-            .attr('data-type', (d) => `${d.Name}`))
+            .attr('data-type', (d) => `${d.Type1}`)
+        )
 
     // Dessin des textes
     let lineText = 0;
@@ -418,18 +523,170 @@ function drawForcesFaiblessesData(fetchedData) {
             .attr("font-size", 14)
             .attr("font-family", "Calibri")
             .attr("font-weight", "bold")
-            .attr("class", "pokeText")
+            .attr("class", "elementText")
             .attr("color", "white")
-            .text(d => d.Type1.length > 10 ? d.Type1.slice(0, 9) : d.Type1))
+            .text(d => d.Type1.length > 10 ? d.Type1.slice(0, 9) : d.Type1)
+            .attr('data-type', (d) => `${d.Type1}`)
+        )
 
-    //Ajout de la responsivité des boutons
-    let reumeButtons = document.querySelectorAll('.season-select-button')
-    reumeButtons.forEach(button => {
-        button.addEventListener("click", (e) => { let currentSeason = e.target.dataset.season; drawResumeDatas(orderedDatas, currentSeason) })
+    //Rassemblement de tous les cercles et les textes dans un array elementsGroups pour leur ajouter de la responsivité
+    let elementCircles = document.querySelectorAll('.elementCircle');
+    let elementTexts = document.querySelectorAll('.elementText');
+    let elementsGroups = [];
+    elementCircles.forEach(element => {
+        elementsGroups.push(element)
+    });
+    elementTexts.forEach(element => {
+        elementsGroups.push(element)
+    });
+    console.log(elementsGroups)
+
+    //Ajout de la responsivité des élements
+    elementsGroups.forEach(svgGroup => {
+        //On récupère le type de l'élément cliqué selon le dataset du cercle du groupe
+        svgGroup.addEventListener("click", (e) => { drawForcesFaiblessesData(fetchedData, e.target.dataset["type"]) })
+        //svgGroup.addEventListener("click", (e) => { console.log("groupe cliqué", e.target.dataset["type"]) })
     });
 
+    // console.log("forcesFaib", fetchedData)
+}
 
-    console.log("forcesFaib", fetchedData)
+
+function drawPokemonsParType(fetchedData) {
+    console.log("Partype", dataToUpdate.pokemonsPerType);
+
+
+    //Organisation de la donnée 
+    const nbPerElements = [
+        { Type1: "Ghost", nbPokemons: dataToUpdate.pokemonsPerType.Ghost.length },
+        { Type1: "Grass", nbPokemons: dataToUpdate.pokemonsPerType.Grass.length },
+        { Type1: "Ground", nbPokemons: dataToUpdate.pokemonsPerType.Ground.length },
+        { Type1: "Rock", nbPokemons: dataToUpdate.pokemonsPerType.Rock.length },
+        { Type1: "Psychic", nbPokemons: dataToUpdate.pokemonsPerType.Psychic.length },
+        { Type1: "Water", nbPokemons: dataToUpdate.pokemonsPerType.Water.length },
+        { Type1: "Electric", nbPokemons: dataToUpdate.pokemonsPerType.Electric.length },
+        { Type1: "Normal", nbPokemons: dataToUpdate.pokemonsPerType.Normal.length },
+        { Type1: "Fighting", nbPokemons: dataToUpdate.pokemonsPerType.Fighting.length },
+        { Type1: "Poison", nbPokemons: dataToUpdate.pokemonsPerType.Poison.length },
+        { Type1: "Bug", nbPokemons: dataToUpdate.pokemonsPerType.Bug.length },
+        { Type1: "Flying", nbPokemons: dataToUpdate.pokemonsPerType.Flying.length },
+        { Type1: "Ice", nbPokemons: dataToUpdate.pokemonsPerType.Ice.length },
+        { Type1: "Dark", nbPokemons: dataToUpdate.pokemonsPerType.Dark.length },
+        { Type1: "Fire", nbPokemons: dataToUpdate.pokemonsPerType.Fire.length },
+        { Type1: "Dragon", nbPokemons: dataToUpdate.pokemonsPerType.Dragon.length },
+        { Type1: "Fairy", nbPokemons: dataToUpdate.pokemonsPerType.Fairy.length },
+        { Type1: "Steel", nbPokemons: dataToUpdate.pokemonsPerType.Steel.length }
+    ]
+
+    console.log(nbPerElements)
+
+    //Dimensions du svgs montrant les forces et les faiblesses
+    const margin = { top: 10, right: 40, bottom: 10, left: 40 };
+    const nbParTypeWidth = screen.width - margin.left - margin.right - screen.width * 0.2;
+    const nbParTypeHeight = screen.width * 3 / 5 - margin.top - margin.bottom;
+
+
+    //Dessin du svg
+    //Effacement de l'ancienne d'éléments
+    d3.select('.nb-par-type-drawn').remove()
+    d3.select('.nb-par-type-text-drawn').remove()
+    let nbParTypeSvg = d3.select('.nb-par-type-svg');
+    // console.log(nbParTypeSvg)
+    nbParTypeSvg.attr("width", nbParTypeWidth + margin.left + margin.right)
+        .attr("height", nbParTypeHeight + margin.top + margin.bottom)
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    let groupeNbParType = nbParTypeSvg.append('g').attr('class', 'np-par-type-drawn')
+    let groupNbParTypeText = nbParTypeSvg.append('g').attr('class', 'np-par-type-text-drawn')
+    // console.log("nbPerElements", nbPerElements)
+
+
+
+    //Dessin des axes
+    const xscale = d3.scaleThreshold()
+    .domain([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18])
+    .range(['Ghost', 'Grass', 'Ground', 'Rock', 'Psychic', 'Water', 'Electric', 'Normal', 'Fighting', 'Poison', 'Bug', 'Flying', 'Ice', 'Dark', 'Fire', 'Dragon', 'Fairy']);
+
+    let x_axis = d3.axisBottom().scale(xscale).ticks(5);
+
+    //axe x 
+    const x = d3.scaleLinear()
+        .domain([0, 1000])
+
+    let ordinal = d3.scaleOrdinal()
+        .domain([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18])
+        .range(['Ghost', 'Grass', 'Ground', 'Rock', 'Psychic', 'Water', 'Electric', 'Normal', 'Fighting', 'Poison', 'Bug', 'Flying', 'Ice', 'Dark', 'Fire', 'Dragon', 'Fairy']);
+
+    console.log("scaleOrdinal", ordinal(2))
+    nbParTypeSvg.append('g')
+        .call(d3.axisBottom(x))
+        .attr('class', "xAxis")
+        .attr("transform", `translate(100,${nbParTypeHeight + 10})`)
+
+    const y = d3.scaleLinear()
+        .domain([0, 112])
+        .range([nbParTypeHeight, 0])
+
+    //axe y
+    nbParTypeSvg.append('g')
+        .call(d3.axisLeft(y))
+        .attr('class', "yAxis")
+        .attr("transform", "translate(100, 10)")
+
+    //Dessin de barres représentant le nombre de pokemons par type:
+    groupeNbParType.selectAll("nbParType")
+        .data(nbPerElements)
+        //console.log("posts user1", users[1].posts.length)
+        .enter()
+        .append("rect")
+        .attr("height", (d) => d.nbPokemons * 10)
+        .attr("width", 35)
+        .attr("class", d => d.Type1)
+        .attr("fill", d => chooseColorDisplayOnType(d))
+        .attr("x", (d, i) => i * 25 + 30 * i)
+        .attr("y", d => y(d.nbPokemons))
+        .attr("transform", "translate(120, 10)")
+
+
+    //Dessin de texte représentant l'élément à l'intérieur de chaque barre
+    groupNbParTypeText.selectAll('text')
+        .data(nbPerElements)
+        .join(enter => enter.append('text')
+            .attr("x", (d, i) => i * 25 + 30 * i)
+            .attr("y", d => nbParTypeHeight + 10)
+            .attr("font-size", 14)
+            .attr("font-family", "Calibri")
+            .attr("font-weight", "bold")
+            .attr("class", "elementText")
+            .attr("fill", d => (d.Type1 != "Ghost")? "Black": "White")
+            .text(d => d.Type1.length > 10 ? d.Type1.slice(0, 9) : d.Type1)
+            .attr('data-type', (d) => `${d.Type1}`)
+            .attr("transform", "translate(120, 10)")
+        )
+
+
+    //Tentative de rotation des texts
+    // d3.selectAll('.elementText').attr('transform',function(d, i){
+    //     let me = d
+    //     console.log("me",me, i)
+    //     let x1 = (i * 20) + (30 * i);//the center x about which you want to rotate
+    //     let y1 = nbParTypeHeight - d.nbPokemons * 5;//the center y about which you want to rotate
+    //     return `rotate(-90, ${x1}, ${y1})`;//rotate 90 degrees about x and y
+    // })
+
+
+}
+
+
+function drawSchemaElements(){
+    console.log("dessine schema");
+    let htmlList = document.querySelector('select');
+    dataToUpdate.pokemonsPerType.forEach(element => {
+        if(element.Type1 != "Fairy" && element.Type1 != "Bug"){
+            let option = document.createElement(option);
+            option.setAttribute("value", element.Type1);
+            htmlList.append(option);
+        }
+    });
 }
 
 // On link la fonction "displaySection" à l'événement hashchange pour être averti d'un changement de hash dans l'url

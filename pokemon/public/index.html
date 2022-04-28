@@ -44,39 +44,47 @@
                 <li><button class="season-select-button" data-season="3">Saison 03</button></li>
                 <li><button class="season-select-button" data-season="4">Saison 04</button></li>
               </ul>
-            </div>
-            <a href="#forces-faiblesses">Next</a>         
+            </div>        
           </div>
+          <a href="#forces-faiblesses">Next</a> 
         </section>
 
         <section class="forces-faiblesses hidden">
+          <h1>Forces et faiblesses des différents éléments</h1>
+          <span>Cliquez sur un élément pour en voir apparaître les forces et faiblesses</span>
           <div class="forces-faiblesses-wrapper">
             <svg class="forces-faiblesses-svg"></svg>  
-            <svg class ="liste-elements-svg"></svg>      
-            <a href="#schema-elements">Next</a>  
-            <a href="#home">Previous</a>     
+            <svg class ="liste-elements-svg"></svg>          
           </div>
+          <a href="#schema-elements">Next</a>  
+          <a href="#home">Previous</a> 
         </section>
 
 
         <section class="schema-elements  hidden">
             <div class="schema-elements-wrapper">
-              <svg class="schema-element-svg"></svg> 
-              <a href="#pokemons-par-type">Next</a>
-              <a href="#forces-faiblesses">Previous</a>       
+              <select name="type" id="type">
+              </select>
+              <svg class="schema-element-svg"></svg>       
             </div>
+            <a href="#pokemons-par-type">Next</a>
+            <a href="#forces-faiblesses">Previous</a> 
         </section>
 
         <section class="pokemons-par-type hidden">
+          <h1>Nombre de pokemons par type</h1>
+          <h2>Nombre de pokemons</h2>
           <div class="pokemons-par-type-wrapper">
-            <svg class="pokemon-par-type-svg"></svg> 
-            <a href="#combat">Next</a>   
-            <a href="#schema-elements">Previous</a>    
+            <svg class="nb-par-type-svg"></svg>  
           </div>
+          <h2 style=" display: flex; justify-content:center;">Elément concerné</h2>
+          <a href="#combat">Next</a>   
+          <a href="#schema-elements">Previous</a>   
         </section>
 
         <section class="combat hidden">
             <div class="combat-wrapper">
+              <img src="public\img\combatV2.png"/>
               <svg class="combat-svg"></svg> 
               <a href="#pokemons-par-type">Previous</a> 
             </div>
