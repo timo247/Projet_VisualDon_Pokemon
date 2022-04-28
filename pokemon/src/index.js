@@ -300,26 +300,8 @@ function chooseColorDisplayOnType(pokemon) {
     }
 }
 
-function deleteSvgEls() {
-    //Effacement de l'ensemble des éléments dessinés précédemment dans les svg
-
-    let svgEls = document.querySelectorAll('svg')
-    // console.log("delete")
-    svgEls.forEach(svgEl => {
-        let svgChidlren = svgEl.childNodes
-        //console.log(svgChidlren)
-        svgChidlren.forEach(element => {
-            let parent = element.parentNode;
-            // console.log("deleted", parent)
-            element.remove();
-            // console.log(element)
-        });
-    });
-}
-
-
 function drawResumeDatas(orderedDatas, currentSeason) {
-    //console.log("dessin")
+    console.log("dessin")
     //Dessiner
     const margin = { top: 10, right: 40, bottom: 10, left: 40 };
     const resumeWidth = screen.width / 2 - margin.left - margin.right;
@@ -435,9 +417,6 @@ function drawForcesFaiblessesData(fetchedData, elementToDisplay) {
             .text(d => `Element ${selectedType[0].Type1} is weak against`)
         )
 
-
-
-
     let colForcesFaiblesses = 0;
     let lineForcesFaiblesses = 0;
     groupeForcesFaiblesses.selectAll("forcesEtFaiblessesList")
@@ -533,22 +512,13 @@ function drawForcesFaiblessesData(fetchedData, elementToDisplay) {
     let elementCircles = document.querySelectorAll('.elementCircle');
     let elementTexts = document.querySelectorAll('.elementText');
     let elementsGroups = [];
-    elementCircles.forEach(element => {
-        elementsGroups.push(element)
-    });
-    elementTexts.forEach(element => {
-        elementsGroups.push(element)
-    });
-    console.log(elementsGroups)
-
+    elementCircles.forEach(element => {  elementsGroups.push(element)});
+    elementTexts.forEach(element => { elementsGroups.push(element)});
     //Ajout de la responsivité des élements
     elementsGroups.forEach(svgGroup => {
         //On récupère le type de l'élément cliqué selon le dataset du cercle du groupe
         svgGroup.addEventListener("click", (e) => { drawForcesFaiblessesData(fetchedData, e.target.dataset["type"]) })
-        //svgGroup.addEventListener("click", (e) => { console.log("groupe cliqué", e.target.dataset["type"]) })
     });
-
-    // console.log("forcesFaib", fetchedData)
 }
 
 
@@ -605,7 +575,7 @@ function drawPokemonsParType(fetchedData) {
     //axe x 
     const x = d3.scaleLinear()
         .domain([0, 1000])
-        
+
     nbParTypeSvg.append('g')
         .call(d3.axisBottom(x))
         .attr('class', "xAxis")
@@ -673,7 +643,7 @@ function drawSchemaElements(){
     let htmlList = document.querySelector('select');
     console.log(htmlList, dataToUpdate.pokemonsPerType)
     pokeTypes.forEach(element => {
-        if(element != "Fairy" && element != "Bug"){
+        if(element != "Fairy" && element != "Normal"){
             let option = document.createElement('option');
             option.textContent = element;
             option.setAttribute("value", element);
