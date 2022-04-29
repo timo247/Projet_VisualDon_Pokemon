@@ -1,6 +1,11 @@
 import * as d3 from 'd3'
 import { csv, json } from 'd3-fetch'
 
+//Changer l'échelle des barres
+//Les trier par ordre de grandeur
+//descendre les descriptions des types
+//Indiquer plus explicitement qu'il faut cliquer sur les ronds
+//Ajouter des animations
 
 let dataToUpdate = { pokemonsPerType: [] }
 
@@ -530,12 +535,14 @@ function drawPokemonsParType(fetchedData) {
         { Type1: "Steel", nbPokemons: dataToUpdate.pokemonsPerType.Steel.length }
     ]
 
+    nbPerElements.sort(function (a,b) { return b.nbPokemons - a.nbPokemons})
+
     console.log(nbPerElements)
 
     //Dimensions du svgs montrant les forces et les faiblesses
     const margin = { top: 10, right: 40, bottom: 10, left: 40 };
-    const nbParTypeWidth = screen.width - margin.left - margin.right - screen.width * 0.2;
-    const nbParTypeHeight = screen.width * 3 / 5 - margin.top - margin.bottom;
+    const nbParTypeWidth = screen.width - margin.left - margin.right - screen.width * 0.15;
+    const nbParTypeHeight = screen.width * 0.4 - margin.top - margin.bottom;
 
 
     //Dessin du svg
@@ -561,7 +568,7 @@ function drawPokemonsParType(fetchedData) {
     nbParTypeSvg.append('g')
         .call(d3.axisBottom(x))
         .attr('class', "xAxis")
-        .attr("transform", `translate(100,${nbParTypeHeight + 10})`)
+        .attr("transform", `translate(100,${nbParTypeHeight + 30})`)
 
     const y = d3.scaleLinear()
         .domain([0, 112])
@@ -576,10 +583,9 @@ function drawPokemonsParType(fetchedData) {
     //Dessin de barres représentant le nombre de pokemons par type:
     groupeNbParType.selectAll("nbParType")
         .data(nbPerElements)
-        //console.log("posts user1", users[1].posts.length)
         .enter()
         .append("rect")
-        .attr("height", (d) => d.nbPokemons * 10)
+        .attr("height", d => nbParTypeHeight - y(d.nbPokemons))
         .attr("width", 35)
         .attr("class", d => d.Type1)
         .attr("fill", d => chooseColorDisplayOnType(d))
@@ -601,8 +607,12 @@ function drawPokemonsParType(fetchedData) {
             .attr("fill", d => (d.Type1 != "Ghost")? "Black": "White")
             .text(d => d.Type1.length > 10 ? d.Type1.slice(0, 9) : d.Type1)
             .attr('data-type', (d) => `${d.Type1}`)
-            .attr("transform", "translate(120, 10)")
+            .attr("transform", "translate(120, 20)")
         )
+
+        document.querySelector('svg.nb-par-type-svg').setAttribute('height', 600)
+
+
 
     //Tentative de rotation des texts
     // d3.selectAll('.elementText').attr('transform',function(d, i){
