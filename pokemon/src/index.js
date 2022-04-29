@@ -1,9 +1,6 @@
 import * as d3 from 'd3'
 import { csv, json } from 'd3-fetch'
 
-//Changer l'échelle des barres
-//Les trier par ordre de grandeur
-//descendre les descriptions des types
 //Indiquer plus explicitement qu'il faut cliquer sur les ronds
 //Ajouter des animations
 
@@ -560,16 +557,6 @@ function drawPokemonsParType(fetchedData) {
 
 
 
-
-    //axe x 
-    const x = d3.scaleLinear()
-        .domain([0, 1000])
-
-    nbParTypeSvg.append('g')
-        .call(d3.axisBottom(x))
-        .attr('class', "xAxis")
-        .attr("transform", `translate(100,${nbParTypeHeight + 30})`)
-
     const y = d3.scaleLinear()
         .domain([0, 112])
         .range([nbParTypeHeight, 0])
@@ -604,24 +591,13 @@ function drawPokemonsParType(fetchedData) {
             .attr("font-family", "Calibri")
             .attr("font-weight", "bold")
             .attr("class", "elementText")
-            .attr("fill", d => (d.Type1 != "Ghost")? "Black": "White")
+            .attr("fill", d => "Black")
             .text(d => d.Type1.length > 10 ? d.Type1.slice(0, 9) : d.Type1)
             .attr('data-type', (d) => `${d.Type1}`)
             .attr("transform", "translate(120, 20)")
         )
 
         document.querySelector('svg.nb-par-type-svg').setAttribute('height', 600)
-
-
-
-    //Tentative de rotation des texts
-    // d3.selectAll('.elementText').attr('transform',function(d, i){
-    //     let me = d
-    //     console.log("me",me, i)
-    //     let x1 = (i * 20) + (30 * i);//the center x about which you want to rotate
-    //     let y1 = nbParTypeHeight - d.nbPokemons * 5;//the center y about which you want to rotate
-    //     return `rotate(-90, ${x1}, ${y1})`;//rotate 90 degrees about x and y
-    // })
 }
 
 
