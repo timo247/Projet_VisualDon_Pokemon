@@ -502,6 +502,9 @@ function drawForcesFaiblessesData(fetchedData, elementToDisplay) {
     elementsGroups.forEach(svgGroup => {
         //On récupère le type de l'élément cliqué selon le dataset du cercle du groupe
         svgGroup.addEventListener("click", (e) => { drawForcesFaiblessesData(fetchedData, e.target.dataset["type"]) })
+        svgGroup.addEventListener("mouseover", (e) => { e.target.setAttribute("stroke", e.target.getAttribute("fill")); e.target.setAttribute("fill", "white")})
+        svgGroup.addEventListener("mouseleave", (e) => {  e.target.setAttribute("fill",  e.target.getAttribute("stroke")); e.target.setAttribute("stroke","white")})
+
     });
 }
 
