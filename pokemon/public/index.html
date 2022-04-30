@@ -16,33 +16,32 @@
 
       </div>
       <span class="material-icons"></span>
-      <ul id="barrePokemon">
-        <li id="PSsaison"><a id="home" href="#home">Pokemon par saison</a></li>
-        <li id="PType"><a href="#forces-faiblesses">Type de pokemon</a></li>
-        <li id="eVSe"><a href="#schema-elements">Elément VS Elément</a></li>
-        <li id="PTaux"><a href="#pokemons-par-type">Taux de Pokemon par type</a></li>
-        <li id="ExComb"><a href="#combat">Exemple de combat</a></li>
+      <div class="barreJustifiee">
+        <ul id="barrePokemon">
+        <li id="PSsaison"><a class="largTexte" href="#home">Pokemon par saison</a></li>
+        <li id="PType"><a  class="largTexte" href="#forces-faiblesses">Type de pokemon</a></li>
+        <li id="PTaux"><a class="largTexte" href="#pokemons-par-type">Taux de pokétype</a></li>
+        <li id="eVSe"><a class="largTexte" href="#schema-elements">Elément VS Elément</a></li>
+        <li id="ExComb"><a class="largTexte"href="#combat">Exemple de combat</a></li>
 
-      </ul>
-
-      <a id="JP" >Jean-Paul</a>
-      <a id="ann" class="maPageSelect">ann</a>
-      
+        </ul>
+    </div>
+   
     </header>
 
     <main>
      
       <body>
         <section class="resume active">
-          <h2 id="titrePage">Liste des pokemons par saison</h2>
+          <h2 class="titrePage">Liste des pokemons par saison</h2>
           <div class="resume-wrapper">
             <svg class="resume-svg"></svg> 
             <div class="resume-season-selection">
               <ul class="listeSaison">
-                <li><button class="season-select-button" data-season="1">Saison 01</button></li>
-                <li><button class="season-select-button" data-season="2">Saison 02</button></li>
-                <li><button class="season-select-button" data-season="3">Saison 03</button></li>
-                <li><button class="season-select-button" data-season="4">Saison 04</button></li>
+                <li><button id="S1" class="season-select-button" data-season="1"><a class="saisons">Saison 01</a></button></li>
+                <li><button id="S2" class="season-select-button" data-season="2"><a class="saisons">Saison 02</a></button></li>
+                <li><button id="S3" class="season-select-button" data-season="3"><a class="saisons">Saison 03</a></button></li>
+                <li><button id="S4" class="season-select-button" data-season="4"><a class="saisons">Saison 04</a></button></li>
               </ul>
             </div>        
           </div>
@@ -50,7 +49,7 @@
         </section>
 
         <section class="forces-faiblesses hidden">
-          <h1>Forces et faiblesses des différents éléments</h1>
+          <h1 class="titrePage">Forces et faiblesses des différents éléments</h1>
           <span>Cliquez sur un élément pour en voir apparaître les forces et faiblesses</span>
           <div class="forces-faiblesses-wrapper">
             <svg class="forces-faiblesses-svg"></svg>  
@@ -72,7 +71,7 @@
         </section>
 
         <section class="pokemons-par-type hidden">
-          <h1>Nombre de pokemons par type</h1>
+          <h1 class="titrePage">Nombre de pokemons par type</h1>
           <h2>Nombre de pokemons</h2>
           <div class="pokemons-par-type-wrapper">
             <svg class="nb-par-type-svg"></svg>  
