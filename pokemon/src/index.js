@@ -410,13 +410,16 @@ function drawForcesFaiblessesData(fetchedData, elementToDisplay) {
             .attr("font-size", 14)
             .attr("font-family", "Calibri")
             .attr("font-weight", "bold")
-            .attr("x", (d, i) => { if (i % 3 == 0) { colForcesFaiblesses = 0; console.log("colCircle", colForcesFaiblesses) } else { colForcesFaiblesses++ } return (colForcesFaiblesses * 160 - 40) })
+            .attr("x", (d, i) => { if (i % 3 == 0) { colForcesFaiblesses = 0; console.log("colCircle", colForcesFaiblesses) } else { colForcesFaiblesses++ } return (colForcesFaiblesses * 160 + 594) })
             .attr("y", (d, i) => { if (i % 3 == 0) { lineForcesFaiblesses++; } return (lineForcesFaiblesses * 100 + 66) })
             .attr("class", "elementForceFaiblesse")
             .style("fill", d => { let obj = { Type1: d }; return chooseColorDisplayOnType(obj) })
             .attr("transform", "translate(100, 10)")
             .attr('data-type', (d) => `${d}`)
             .text(d => d.length > 10 ? d.slice(0, 9) : d)
+            .transition()
+            .duration(1000) 
+            .attr('transform', 'translate(-540,0)')  
         )
 
 
@@ -424,7 +427,7 @@ function drawForcesFaiblessesData(fetchedData, elementToDisplay) {
     groupeForcesFaiblesses.selectAll("forcesEtFaiblessesList")
         .data(selectedType[0].Type1)
         .join(enter => enter
-            .append("text").attr("class", "faiblessesHeader").attr("width", "400").attr("y", 380).attr("x", 54).attr("font-size", 18)
+            .append("text").attr("class", "faiblessesHeader").attr("width", "400").attr("y", 390).attr("x", 54).attr("font-size", 18)
             .attr("font-family", "Calibri")
             .text(d => `Element ${selectedType[0].Type1} is strong against`)
         )
@@ -437,13 +440,16 @@ function drawForcesFaiblessesData(fetchedData, elementToDisplay) {
             .attr("font-size", 14)
             .attr("font-family", "Calibri")
             .attr("font-weight", "bold")
-            .attr("x", (d, i) => { if (i % 3 == 0) { colForcesFaiblesses = 0; console.log("colCircle", colForcesFaiblesses) } else { colForcesFaiblesses++ } return (colForcesFaiblesses * 160 - 40) })
+            .attr("x", (d, i) => { if (i % 3 == 0) { colForcesFaiblesses = 0; console.log("colCircle", colForcesFaiblesses) } else { colForcesFaiblesses++ } return (colForcesFaiblesses * 160 +594) })
             .attr("y", (d, i) => { if (i % 3 == 0) { lineForcesFaiblesses++; } return (lineForcesFaiblesses * 100 + 366) })
             .attr("class", "elementForceFaiblesse")
             .style("fill", d => { let obj = { Type1: d }; return chooseColorDisplayOnType(obj) })
             .attr("transform", "translate(100, 10)")
             .attr('data-type', (d) => `${d}`)
             .text(d => d.length > 10 ? d.slice(0, 9) : d)
+            .transition()
+            .duration(1000) 
+            .attr('transform', 'translate(-540,0)')  
         )
 
 
@@ -464,7 +470,7 @@ function drawForcesFaiblessesData(fetchedData, elementToDisplay) {
         .data(elements)
         .join(enter => enter
             .append("circle")
-            .attr("cx", (d, i) => { if (i % 3 == 0) { colCircle = 0; console.log("colCircle", colCircle) } else { colCircle++ } return (colCircle * 160 - 40) })
+            .attr("cx", (d, i) => { if (i % 3 == 0) { colCircle = 0; console.log("colCircle", colCircle) } else { colCircle++ } return (colCircle * 160 +500) })
             //affichage des cercles en ligne
             .attr("cy", (d, i) => { if (i % 3 == 0) { lineCircle++; } return (lineCircle * 100 - 34) })
             .attr("r", d => 34)
@@ -472,6 +478,9 @@ function drawForcesFaiblessesData(fetchedData, elementToDisplay) {
             .attr("fill", d => chooseColorDisplayOnType(d))
             .attr("transform", "translate(100, 10)")
             .attr('data-type', (d) => `${d.Type1}`)
+            .transition()
+            .duration(1000) 
+            .attr('transform', 'translate(-440,0)')  
         )
 
     // Dessin des textes
