@@ -1,22 +1,9 @@
 import * as d3 from 'd3'
 import { csv, json } from 'd3-fetch'
 
+//Indiquer plus explicitement qu'il faut cliquer sur les ronds
+//Ajouter des animations
 
-// Pour importer les données
-// import file from '../data/data.csv'
-//console.log("pikachu")
-//Récipération des données
-/*
-Promise.all([
-    json('pokemon\data\donnes-pokemon.json'),
-]).then(([data]) =>{
-    console.log("datapok", pokemon)
-})
-*/
-
-
-
-let seasonSelected = false;
 let dataToUpdate = { pokemonsPerType: [] }
 
 
@@ -25,8 +12,6 @@ function fetchData() {
     let season2Pokemons = [];
     let season3Pokemons = [];
     let season4Pokemons = [];
-
-    let elementsSchema = NaN
 
     d3.json('../donnees-pokemon.json')
         .then(function (data) {
@@ -110,8 +95,6 @@ function fetchData() {
                 }
             });
 
-
-
             dataToUpdate.pokemonsPerType = {
                 Dragon: dragonPokemons,
                 Grass: grassPokemons,
@@ -132,9 +115,6 @@ function fetchData() {
                 Fighting: fightingPokemons,
                 Rock: rockPokemons
             }
-
-            // console.log(pokemonsPerType)
-
 
             //Regrouppement des données dans un objet pour faciliter son utilisation
             let orderedDatas = {}
@@ -220,6 +200,8 @@ function displaySection(fetchedData) {
             });
             document.querySelector('.schema-elements').classList.add('active');
             document.querySelector('.schema-elements').classList.remove('hidden');
+
+
             drawSchemaElements();
             break;
 
@@ -235,6 +217,8 @@ function displaySection(fetchedData) {
             });
             document.querySelector('.pokemons-par-type').classList.add('active');
             document.querySelector('.pokemons-par-type').classList.remove('hidden');
+
+
             drawPokemonsParType(fetchedData);
             break;
 
@@ -300,26 +284,8 @@ function chooseColorDisplayOnType(pokemon) {
     }
 }
 
-function deleteSvgEls() {
-    //Effacement de l'ensemble des éléments dessinés précédemment dans les svg
-
-    let svgEls = document.querySelectorAll('svg')
-    // console.log("delete")
-    svgEls.forEach(svgEl => {
-        let svgChidlren = svgEl.childNodes
-        //console.log(svgChidlren)
-        svgChidlren.forEach(element => {
-            let parent = element.parentNode;
-            // console.log("deleted", parent)
-            element.remove();
-            // console.log(element)
-        });
-    });
-}
-
-
 function drawResumeDatas(orderedDatas, currentSeason) {
-    //console.log("dessin")
+    console.log("dessin")
     //Dessiner
     const margin = { top: 10, right: 40, bottom: 10, left: 40 };
     const resumeWidth = screen.width / 2 - margin.left - margin.right;
@@ -344,13 +310,16 @@ function drawResumeDatas(orderedDatas, currentSeason) {
             .append("circle")
             .attr("cx", (d, i) => { if (i % 12 == 0) { colCircle = 0; console.log("colCircle", colCircle) } else { colCircle++ } return (colCircle * 40 - 40) })
             //affichage des cercles en ligne
-            .attr("cy", (d, i) => { if (i % 12 == 0) { lineCircle++; } return (lineCircle * 45 - 20) })
+            .attr("cy", (d, i) => { if (i % 12 == 0) { lineCircle++; } return (lineCircle * 45 - 420) })
             .attr("r", d => 15)
             .style("fill", d => chooseColorDisplayOnType(d))
             .attr("transform", "translate(100, 10)")
             .attr("class", (d) => d.Name)
             .attr("class", (d) => `pokeCircle ${d.Name}`)
             .attr('data-name', (d) => `${d.Name}`))
+            .transition()
+            .duration(1000)
+            .attr('transform', 'translate(100,410)')  
 
     // Dessin des textes
     let lineText = 0;
@@ -435,9 +404,6 @@ function drawForcesFaiblessesData(fetchedData, elementToDisplay) {
             .text(d => `Element ${selectedType[0].Type1} is weak against`)
         )
 
-
-
-
     let colForcesFaiblesses = 0;
     let lineForcesFaiblesses = 0;
     groupeForcesFaiblesses.selectAll("forcesEtFaiblessesList")
@@ -447,13 +413,16 @@ function drawForcesFaiblessesData(fetchedData, elementToDisplay) {
             .attr("font-size", 14)
             .attr("font-family", "Dosis")
             .attr("font-weight", "bold")
-            .attr("x", (d, i) => { if (i % 3 == 0) { colForcesFaiblesses = 0; console.log("colCircle", colForcesFaiblesses) } else { colForcesFaiblesses++ } return (colForcesFaiblesses * 160 - 40) })
+            .attr("x", (d, i) => { if (i % 3 == 0) { colForcesFaiblesses = 0; console.log("colCircle", colForcesFaiblesses) } else { colForcesFaiblesses++ } return (colForcesFaiblesses * 160 + 594) })
             .attr("y", (d, i) => { if (i % 3 == 0) { lineForcesFaiblesses++; } return (lineForcesFaiblesses * 100 + 66) })
             .attr("class", "elementForceFaiblesse")
             .style("fill", d => { let obj = { Type1: d }; return chooseColorDisplayOnType(obj) })
             .attr("transform", "translate(100, 10)")
             .attr('data-type', (d) => `${d}`)
             .text(d => d.length > 10 ? d.slice(0, 9) : d)
+            .transition()
+            .duration(1000) 
+            .attr('transform', 'translate(-540,0)')  
         )
 
 
@@ -461,8 +430,13 @@ function drawForcesFaiblessesData(fetchedData, elementToDisplay) {
     groupeForcesFaiblesses.selectAll("forcesEtFaiblessesList")
         .data(selectedType[0].Type1)
         .join(enter => enter
+<<<<<<< HEAD
             .append("text").attr("class", "faiblessesHeader").attr("width", "400").attr("y", 380).attr("x", 54).attr("font-size", 18)
             .attr("font-family", "Dosis")
+=======
+            .append("text").attr("class", "faiblessesHeader").attr("width", "400").attr("y", 390).attr("x", 54).attr("font-size", 18)
+            .attr("font-family", "Calibri")
+>>>>>>> a0dd09175edf506d31d5fe05538b95072246e118
             .text(d => `Element ${selectedType[0].Type1} is strong against`)
         )
     colForcesFaiblesses = 0;
@@ -474,13 +448,16 @@ function drawForcesFaiblessesData(fetchedData, elementToDisplay) {
             .attr("font-size", 14)
             .attr("font-family", "Dosis")
             .attr("font-weight", "bold")
-            .attr("x", (d, i) => { if (i % 3 == 0) { colForcesFaiblesses = 0; console.log("colCircle", colForcesFaiblesses) } else { colForcesFaiblesses++ } return (colForcesFaiblesses * 160 - 40) })
+            .attr("x", (d, i) => { if (i % 3 == 0) { colForcesFaiblesses = 0; console.log("colCircle", colForcesFaiblesses) } else { colForcesFaiblesses++ } return (colForcesFaiblesses * 160 +594) })
             .attr("y", (d, i) => { if (i % 3 == 0) { lineForcesFaiblesses++; } return (lineForcesFaiblesses * 100 + 366) })
             .attr("class", "elementForceFaiblesse")
             .style("fill", d => { let obj = { Type1: d }; return chooseColorDisplayOnType(obj) })
             .attr("transform", "translate(100, 10)")
             .attr('data-type', (d) => `${d}`)
             .text(d => d.length > 10 ? d.slice(0, 9) : d)
+            .transition()
+            .duration(1000) 
+            .attr('transform', 'translate(-540,0)')  
         )
 
 
@@ -501,7 +478,7 @@ function drawForcesFaiblessesData(fetchedData, elementToDisplay) {
         .data(elements)
         .join(enter => enter
             .append("circle")
-            .attr("cx", (d, i) => { if (i % 3 == 0) { colCircle = 0; console.log("colCircle", colCircle) } else { colCircle++ } return (colCircle * 160 - 40) })
+            .attr("cx", (d, i) => { if (i % 3 == 0) { colCircle = 0; console.log("colCircle", colCircle) } else { colCircle++ } return (colCircle * 160 +500) })
             //affichage des cercles en ligne
             .attr("cy", (d, i) => { if (i % 3 == 0) { lineCircle++; } return (lineCircle * 100 - 34) })
             .attr("r", d => 34)
@@ -509,6 +486,9 @@ function drawForcesFaiblessesData(fetchedData, elementToDisplay) {
             .attr("fill", d => chooseColorDisplayOnType(d))
             .attr("transform", "translate(100, 10)")
             .attr('data-type', (d) => `${d.Type1}`)
+            .transition()
+            .duration(1000) 
+            .attr('transform', 'translate(-440,0)')  
         )
 
     // Dessin des textes
@@ -533,22 +513,16 @@ function drawForcesFaiblessesData(fetchedData, elementToDisplay) {
     let elementCircles = document.querySelectorAll('.elementCircle');
     let elementTexts = document.querySelectorAll('.elementText');
     let elementsGroups = [];
-    elementCircles.forEach(element => {
-        elementsGroups.push(element)
-    });
-    elementTexts.forEach(element => {
-        elementsGroups.push(element)
-    });
-    console.log(elementsGroups)
-
+    elementCircles.forEach(element => {  elementsGroups.push(element)});
+    elementTexts.forEach(element => { elementsGroups.push(element)});
     //Ajout de la responsivité des élements
     elementsGroups.forEach(svgGroup => {
         //On récupère le type de l'élément cliqué selon le dataset du cercle du groupe
         svgGroup.addEventListener("click", (e) => { drawForcesFaiblessesData(fetchedData, e.target.dataset["type"]) })
-        //svgGroup.addEventListener("click", (e) => { console.log("groupe cliqué", e.target.dataset["type"]) })
-    });
+        svgGroup.addEventListener("mouseover", (e) => { e.target.setAttribute("stroke", e.target.getAttribute("fill")); e.target.setAttribute("fill", "white")})
+        svgGroup.addEventListener("mouseleave", (e) => {  e.target.setAttribute("fill",  e.target.getAttribute("stroke")); e.target.setAttribute("stroke","white")})
 
-    // console.log("forcesFaib", fetchedData)
+    });
 }
 
 
@@ -578,12 +552,14 @@ function drawPokemonsParType(fetchedData) {
         { Type1: "Steel", nbPokemons: dataToUpdate.pokemonsPerType.Steel.length }
     ]
 
+    nbPerElements.sort(function (a,b) { return b.nbPokemons - a.nbPokemons})
+
     console.log(nbPerElements)
 
     //Dimensions du svgs montrant les forces et les faiblesses
     const margin = { top: 10, right: 40, bottom: 10, left: 40 };
-    const nbParTypeWidth = screen.width - margin.left - margin.right - screen.width * 0.2;
-    const nbParTypeHeight = screen.width * 3 / 5 - margin.top - margin.bottom;
+    const nbParTypeWidth = screen.width - margin.left - margin.right - screen.width * 0.15;
+    const nbParTypeHeight = screen.width * 0.4 - margin.top - margin.bottom;
 
 
     //Dessin du svg
@@ -601,27 +577,6 @@ function drawPokemonsParType(fetchedData) {
 
 
 
-    //Dessin des axes
-    const xscale = d3.scaleThreshold()
-    .domain([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18])
-    .range(['Ghost', 'Grass', 'Ground', 'Rock', 'Psychic', 'Water', 'Electric', 'Normal', 'Fighting', 'Poison', 'Bug', 'Flying', 'Ice', 'Dark', 'Fire', 'Dragon', 'Fairy']);
-
-    let x_axis = d3.axisBottom().scale(xscale).ticks(5);
-
-    //axe x 
-    const x = d3.scaleLinear()
-        .domain([0, 1000])
-
-    let ordinal = d3.scaleOrdinal()
-        .domain([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18])
-        .range(['Ghost', 'Grass', 'Ground', 'Rock', 'Psychic', 'Water', 'Electric', 'Normal', 'Fighting', 'Poison', 'Bug', 'Flying', 'Ice', 'Dark', 'Fire', 'Dragon', 'Fairy']);
-
-    console.log("scaleOrdinal", ordinal(2))
-    nbParTypeSvg.append('g')
-        .call(d3.axisBottom(x))
-        .attr('class', "xAxis")
-        .attr("transform", `translate(100,${nbParTypeHeight + 10})`)
-
     const y = d3.scaleLinear()
         .domain([0, 112])
         .range([nbParTypeHeight, 0])
@@ -635,16 +590,22 @@ function drawPokemonsParType(fetchedData) {
     //Dessin de barres représentant le nombre de pokemons par type:
     groupeNbParType.selectAll("nbParType")
         .data(nbPerElements)
-        //console.log("posts user1", users[1].posts.length)
         .enter()
         .append("rect")
-        .attr("height", (d) => d.nbPokemons * 10)
+        .attr("height", d => nbParTypeHeight - y(d.nbPokemons)) 
+        .transition()
+        .duration(3000) 
+        .attr('transform', 'translate(120, 10)')      
         .attr("width", 35)
         .attr("class", d => d.Type1)
         .attr("fill", d => chooseColorDisplayOnType(d))
         .attr("x", (d, i) => i * 25 + 30 * i)
         .attr("y", d => y(d.nbPokemons))
-        .attr("transform", "translate(120, 10)")
+
+
+        // .transition()
+        // .duration(3000)
+        // .attr('transform', 'translate(400, 0)')
 
 
     //Dessin de texte représentant l'élément à l'intérieur de chaque barre
@@ -657,36 +618,55 @@ function drawPokemonsParType(fetchedData) {
             .attr("font-family", "Dosis")
             .attr("font-weight", "bold")
             .attr("class", "elementText")
-            .attr("fill", d => (d.Type1 != "Ghost")? "Black": "White")
+            .attr("fill", d => "Black")
             .text(d => d.Type1.length > 10 ? d.Type1.slice(0, 9) : d.Type1)
             .attr('data-type', (d) => `${d.Type1}`)
-            .attr("transform", "translate(120, 10)")
+            .attr("transform", "translate(120, 20)")
         )
 
-
-    //Tentative de rotation des texts
-    // d3.selectAll('.elementText').attr('transform',function(d, i){
-    //     let me = d
-    //     console.log("me",me, i)
-    //     let x1 = (i * 20) + (30 * i);//the center x about which you want to rotate
-    //     let y1 = nbParTypeHeight - d.nbPokemons * 5;//the center y about which you want to rotate
-    //     return `rotate(-90, ${x1}, ${y1})`;//rotate 90 degrees about x and y
-    // })
-
-
+        document.querySelector('svg.nb-par-type-svg').setAttribute('height', 600)
 }
 
 
 function drawSchemaElements(){
+
+    //Generate pokemon types dynamically
+    const pokeTypes = ['Ghost', 'Grass', 'Ground', 'Rock', 'Psychic', 'Water', 'Electric', 'Normal', 'Fighting', 'Poison', 'Bug', 'Flying', 'Ice', 'Dark', 'Fire', 'Dragon', 'Fairy']
     console.log("dessine schema");
     let htmlList = document.querySelector('select');
-    dataToUpdate.pokemonsPerType.forEach(element => {
-        if(element.Type1 != "Fairy" && element.Type1 != "Bug"){
-            let option = document.createElement(option);
-            option.setAttribute("value", element.Type1);
+    console.log(htmlList, dataToUpdate.pokemonsPerType)
+    pokeTypes.forEach(element => {
+        if(element != "Fairy" && element != "Normal"){
+            let option = document.createElement('option');
+            option.textContent = element;
+            option.setAttribute("value", element);
+            option.setAttribute("data-element", element)
             htmlList.append(option);
         }
     });
+
+    //Dessin du schema
+    let svg = d3.select('.schema-element-svg')
+    .attr('width', window.innerWidth * 0.75)
+    .attr('height', window.innerWidth * 0.75)
+
+    let schema = svg.append('image')
+    .attr("class", "dynamic-schema")
+    .attr('href', './img/Pikachu.svg')
+    .attr('width', window.innerWidth * 0.75)
+    .attr('height', window.innerWidth * 0.75)
+
+    //Dessin du schema selon l'attribu sélectionné:
+    console.log(htmlList.children)
+    htmlList.addEventListener("click", e => {
+            console.log('select')
+            let selectedElement = e.target.value;
+            let imageSrc = `./img/types-svg/${selectedElement}.svg`;
+            document.querySelector(".dynamic-schema").setAttribute("href", imageSrc);
+
+                //Change de titre
+    document.querySelector(".schema-element-name").textContent=`${selectedElement} element`
+        })      
 }
 
 // On link la fonction "displaySection" à l'événement hashchange pour être averti d'un changement de hash dans l'url
