@@ -310,13 +310,16 @@ function drawResumeDatas(orderedDatas, currentSeason) {
             .append("circle")
             .attr("cx", (d, i) => { if (i % 12 == 0) { colCircle = 0; console.log("colCircle", colCircle) } else { colCircle++ } return (colCircle * 40 - 40) })
             //affichage des cercles en ligne
-            .attr("cy", (d, i) => { if (i % 12 == 0) { lineCircle++; } return (lineCircle * 45 - 20) })
+            .attr("cy", (d, i) => { if (i % 12 == 0) { lineCircle++; } return (lineCircle * 45 - 420) })
             .attr("r", d => 15)
             .style("fill", d => chooseColorDisplayOnType(d))
             .attr("transform", "translate(100, 10)")
             .attr("class", (d) => d.Name)
             .attr("class", (d) => `pokeCircle ${d.Name}`)
             .attr('data-name', (d) => `${d.Name}`))
+            .transition()
+            .duration(1000)
+            .attr('transform', 'translate(100,410)')  
 
     // Dessin des textes
     let lineText = 0;
