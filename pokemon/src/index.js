@@ -430,13 +430,8 @@ function drawForcesFaiblessesData(fetchedData, elementToDisplay) {
     groupeForcesFaiblesses.selectAll("forcesEtFaiblessesList")
         .data(selectedType[0].Type1)
         .join(enter => enter
-<<<<<<< HEAD
             .append("text").attr("class", "faiblessesHeader").attr("width", "400").attr("y", 380).attr("x", 54).attr("font-size", 18)
             .attr("font-family", "Dosis")
-=======
-            .append("text").attr("class", "faiblessesHeader").attr("width", "400").attr("y", 390).attr("x", 54).attr("font-size", 18)
-            .attr("font-family", "Calibri")
->>>>>>> a0dd09175edf506d31d5fe05538b95072246e118
             .text(d => `Element ${selectedType[0].Type1} is strong against`)
         )
     colForcesFaiblesses = 0;
