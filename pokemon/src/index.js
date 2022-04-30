@@ -575,13 +575,20 @@ function drawPokemonsParType(fetchedData) {
         .data(nbPerElements)
         .enter()
         .append("rect")
-        .attr("height", d => nbParTypeHeight - y(d.nbPokemons))
+        .attr("height", d => nbParTypeHeight - y(d.nbPokemons)) 
+        .transition()
+        .duration(3000) 
+        .attr('transform', 'translate(120, 10)')      
         .attr("width", 35)
         .attr("class", d => d.Type1)
         .attr("fill", d => chooseColorDisplayOnType(d))
         .attr("x", (d, i) => i * 25 + 30 * i)
         .attr("y", d => y(d.nbPokemons))
-        .attr("transform", "translate(120, 10)")
+
+
+        // .transition()
+        // .duration(3000)
+        // .attr('transform', 'translate(400, 0)')
 
 
     //Dessin de texte représentant l'élément à l'intérieur de chaque barre
