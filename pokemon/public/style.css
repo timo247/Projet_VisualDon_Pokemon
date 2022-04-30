@@ -241,12 +241,25 @@ li {
     background-color: #8994bd; 
 }
 
-/* 
-.forces-faiblesses-wrapper{
-    display:flex;
-    flex-direction:row;
-}*/
+/*Page élément contre élément----------------------------------------------------------------------------------*/
 
+.police {
+    font-family: pokemon;
+    letter-spacing: 3px;
+    padding: 0 20px;
+}
+
+/*Page de compbat----------------------------------------------------------------------------------------------*/
+.combat-wrapper{    
+    display:flex;
+    justify-content:center;
+    margin: auto;
+    width: 90px;
+}
+
+.construction{
+    width: 10%;
+}
 /* fonts-------------------------------------------------------------------------------------------------------*/
 
 @font-face {

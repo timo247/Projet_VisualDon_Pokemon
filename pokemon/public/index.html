@@ -5,6 +5,7 @@
     <title>Projet VisualDon 22 - Pokemon</title>
     <script src="main.js"></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="pikachu icon" type="image/png" href="./assets/img/favicon-pikachu.ico"/>
   </head>
   <body>
 
@@ -33,7 +34,7 @@
      
       <body>
         <section class="resume active">
-          <h2 class="titrePage">List of pokemon by season</h2>
+          <h1 class="titrePage">List of pokemon by season</h1>
           <div class="resume-wrapper">
             <svg class="resume-svg"></svg> 
             <div class="resume-season-selection">
@@ -49,7 +50,7 @@
 
         <section class="forces-faiblesses hidden">
           <h1 class="titrePage">Strengths and weaknesses of the different elements</h1>
-          <span>Click on an item to see its strengths and weaknesses</span>
+          <span class="police">Click on an item to see its strengths and weaknesses</span>
           <div class="forces-faiblesses-wrapper">
             <svg class="forces-faiblesses-svg"></svg>  
             <svg class ="liste-elements-svg"></svg>          
@@ -58,6 +59,7 @@
 
 
         <section class="schema-elements  hidden">
+          <h1 class="titrePage">Strength of one element over the others</h1>
             <div class="schema-elements-wrapper">
               <select name="type" id="type">
               </select>
@@ -75,8 +77,9 @@
         </section>
 
         <section class="combat hidden">
+          <h1 class="titrePage">Pokemon fight</h1>
             <div class="combat-wrapper">
-              <img src="public\img\combatV2.png"/>
+              <img id="construction"src="img/pageConstruction.png"/>
               <svg class="combat-svg"></svg> 
             </div>
         </section>

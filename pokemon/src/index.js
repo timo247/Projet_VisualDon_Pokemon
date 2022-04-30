@@ -386,7 +386,7 @@ function drawForcesFaiblessesData(fetchedData, elementToDisplay) {
     let forcesFaiblessesSvg = d3.select('.forces-faiblesses-svg');
     forcesFaiblessesSvg.attr("width", forcesFaiblessesWidth + margin.left + margin.right)
         .attr("height", forcesFaiblessesHeight + margin.top + margin.bottom)
-        .attr("font-size", 14)
+        .attr("font-size", 16)
         .attr("font-family", "Dosis")
         .attr("transform", "translate(" + margin.left + "," + (-30) + ")");
     let groupeForcesFaiblesses = forcesFaiblessesSvg.append('g').attr('class', 'forces-faiblesses-drawn')
@@ -399,7 +399,7 @@ function drawForcesFaiblessesData(fetchedData, elementToDisplay) {
         .data(selectedType[0].Type1)
         .join(enter => enter
             .append("text").attr("class", "faiblessesHeader").attr("width", "400").attr("y", 100).attr("x", 54)
-            .attr("font-size", 18)
+            .attr("font-size", 24)
             .attr("font-family", "Dosis")
             .text(d => `Element ${selectedType[0].Type1} is weak against`)
         )
@@ -410,7 +410,7 @@ function drawForcesFaiblessesData(fetchedData, elementToDisplay) {
         .data(selectedType[0].weaknesses)
         .join(enter => enter
             .append("text")
-            .attr("font-size", 14)
+            .attr("font-size", 22)
             .attr("font-family", "Dosis")
             .attr("font-weight", "bold")
             .attr("x", (d, i) => { if (i % 3 == 0) { colForcesFaiblesses = 0; console.log("colCircle", colForcesFaiblesses) } else { colForcesFaiblesses++ } return (colForcesFaiblesses * 160 + 594) })
@@ -430,7 +430,7 @@ function drawForcesFaiblessesData(fetchedData, elementToDisplay) {
     groupeForcesFaiblesses.selectAll("forcesEtFaiblessesList")
         .data(selectedType[0].Type1)
         .join(enter => enter
-            .append("text").attr("class", "faiblessesHeader").attr("width", "400").attr("y", 380).attr("x", 54).attr("font-size", 18)
+            .append("text").attr("class", "faiblessesHeader").attr("width", "400").attr("y", 410).attr("x", 54).attr("font-size", 24)
             .attr("font-family", "Dosis")
             .text(d => `Element ${selectedType[0].Type1} is strong against`)
         )
@@ -440,7 +440,7 @@ function drawForcesFaiblessesData(fetchedData, elementToDisplay) {
         .data(selectedType[0].strengths)
         .join(enter => enter
             .append("text")
-            .attr("font-size", 14)
+            .attr("font-size", 22)
             .attr("font-family", "Dosis")
             .attr("font-weight", "bold")
             .attr("x", (d, i) => { if (i % 3 == 0) { colForcesFaiblesses = 0; console.log("colCircle", colForcesFaiblesses) } else { colForcesFaiblesses++ } return (colForcesFaiblesses * 160 +594) })
@@ -495,7 +495,7 @@ function drawForcesFaiblessesData(fetchedData, elementToDisplay) {
         .join(enter => enter.append('text')
             .attr('x', (d, i) => { if (i % 3 == 0) { colText = 0; } else { colText++ } return (colText * 160 + 40) })
             .attr("y", (d, i) => { if (i % 3 == 0) { lineText++; } return (lineText * 100 + 25) })
-            .attr("font-size", 14)
+            .attr("font-size", 18)
             .attr("font-family", "Dosis")
             .attr("font-weight", "bold")
             .attr("class", "elementText")
