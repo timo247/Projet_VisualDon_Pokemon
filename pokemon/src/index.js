@@ -487,6 +487,8 @@ function drawForcesFaiblessesData(fetchedData, elementToDisplay) {
   //Effacement des anciens forces et faiblesses
   d3.select(".forces-faiblesses-drawn").remove();
   let forcesFaiblessesSvg = d3.select(".forces-faiblesses-svg");
+  d3.select(".faiblessesHeader").remove();
+
   forcesFaiblessesSvg
     .attr("width", forcesFaiblessesWidth + margin.left + margin.right)
     .attr("height", forcesFaiblessesHeight + margin.top + margin.bottom)
