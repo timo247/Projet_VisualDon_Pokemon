@@ -5,32 +5,48 @@
     <title>Projet VisualDon 22 - Pokemon</title>
     <script src="main.js"></script>
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="pikachu icon"
+      type="image/png"
+      href="./assets/img/favicon-pikachu.ico"
+    />
   </head>
   <body>
     <header>
       <!--Si c'est pour du contenu les images se mettent dans le HTML sinon dans le CSS
       ex. Logo dans le HTML, image d'arrière plan dans le CSS-->
-      <div id="containerLogo">
-        <img
-          id="logoMain"
-          width="200px"
-          src=".\img\logo_pokemon.jpg"
-          alt="logo pokemon avec pikachu "
-        />
+      <div id="background">
+        <div id="containerLogo">
+          <img
+            id="logoMain"
+            width="200px"
+            src=".\img\logo_pokemon.png"
+            alt="logo pokemon avec pikachu "
+          />
+        </div>
+        <span class="material-icons"></span>
+        <div class="barreJustifiee">
+          <ul id="barrePokemon">
+            <li id="PSsaison">
+              <a class="largTexte" href="#home">Pokemon by season</a>
+            </li>
+            <li id="PType">
+              <a class="largTexte" href="#forces-faiblesses">Type of pokemon</a>
+            </li>
+            <li id="PTaux">
+              <a class="largTexte" href="#pokemons-par-type">Poketype rate</a>
+            </li>
+            <li id="eVSe">
+              <a class="largTexte" href="#schema-elements"
+                >Element VS Element</a
+              >
+            </li>
+            <li id="ExComb">
+              <a class="largTexte" href="#combat">Example of a fight</a>
+            </li>
+          </ul>
+        </div>
       </div>
-      <span class="material-icons"></span>
-      <ul id="barrePokemon">
-        <li id="PSsaison"><a id="home" href="#home">Pokemon par saison</a></li>
-        <li id="PType"><a href="#forces-faiblesses">Type de pokemon</a></li>
-        <li id="eVSe"><a href="#schema-elements">Elément VS Elément</a></li>
-        <li id="PTaux">
-          <a href="#pokemons-par-type">Taux de Pokemon par type</a>
-        </li>
-        <li id="ExComb"><a href="#combat">Exemple de combat</a></li>
-      </ul>
-
-      <a id="JP">Jean-Paul</a>
-      <a id="ann" class="maPageSelect">ann</a>
     </header>
 
     <main>
