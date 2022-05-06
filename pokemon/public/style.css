@@ -177,7 +177,7 @@ li {
     padding:5px 0 5px 35px;
     font-family: pokemon;
     letter-spacing: 2px;
-    width: 90px;
+    width: 180px;
 }
 
 #S1 {
@@ -231,15 +231,16 @@ li {
     background-color: #78bbd5; 
 }
 
-#S4 {
+#S4     {
     display: flex;
-    padding: 10px;
-    background-image: url(./img/pokeball4.png);
-    background-repeat: no-repeat;
-    background-color:#99A7D5;
-    background-size: 3em; 
-    background-position: left center;
-    transition: 440ms;
+padding: 10px;
+background-image: url(./img/pokeball4.png);
+background-repeat: no-repeat;
+background-color: #99A7D5;
+background-size: 3em;
+background-position: left center;
+transition: 440ms;
+justify-content: center;
 }
 
 #S4:hover {
