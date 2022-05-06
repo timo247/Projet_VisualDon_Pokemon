@@ -4,88 +4,116 @@
     <meta charset="utf-8" />
     <title>Projet VisualDon 22 - Pokemon</title>
     <script src="main.js"></script>
-    <link rel="stylesheet" href="style.css">
-    <link rel="pikachu icon" type="image/png" href="./assets/img/favicon-pikachu.ico"/>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-
     <header>
       <!--Si c'est pour du contenu les images se mettent dans le HTML sinon dans le CSS
       ex. Logo dans le HTML, image d'arrière plan dans le CSS-->
       <div id="containerLogo">
-     <img id="logoMain" width="200px" src=".\img\logo_pokemon.jpg" alt="logo pokemon avec pikachu ">
-
+        <img
+          id="logoMain"
+          width="200px"
+          src=".\img\logo_pokemon.jpg"
+          alt="logo pokemon avec pikachu "
+        />
       </div>
       <span class="material-icons"></span>
-      <div class="barreJustifiee">
-        <ul id="barrePokemon">
-        <li id="PSsaison"><a class="largTexte" href="#home">Pokemon by season</a></li>
-        <li id="PType"><a  class="largTexte" href="#forces-faiblesses">Type of pokemon</a></li>
-        <li id="PTaux"><a class="largTexte" href="#pokemons-par-type">Poketype rate</a></li>
-        <li id="eVSe"><a class="largTexte" href="#schema-elements">Element VS Element</a></li>
-        <li id="ExComb"><a class="largTexte"href="#combat">Example of a fight</a></li>
+      <ul id="barrePokemon">
+        <li id="PSsaison"><a id="home" href="#home">Pokemon par saison</a></li>
+        <li id="PType"><a href="#forces-faiblesses">Type de pokemon</a></li>
+        <li id="eVSe"><a href="#schema-elements">Elément VS Elément</a></li>
+        <li id="PTaux">
+          <a href="#pokemons-par-type">Taux de Pokemon par type</a>
+        </li>
+        <li id="ExComb"><a href="#combat">Exemple de combat</a></li>
+      </ul>
 
-        </ul>
-    </div>
-   
+      <a id="JP">Jean-Paul</a>
+      <a id="ann" class="maPageSelect">ann</a>
     </header>
 
     <main>
-     
       <body>
         <section class="resume active">
-          <h1 class="titrePage">List of pokemon by season</h1>
+          <h2 id="titrePage">List of pokemons per season</h2>
           <div class="resume-wrapper">
-            <svg class="resume-svg"></svg> 
+            <svg class="resume-svg"></svg>
             <div class="resume-season-selection">
               <ul class="listeSaison">
-                <li><button id="S1" class="season-select-button" data-season="1"><a class="saisons">Season 01</a></button></li>
-                <li><button id="S2" class="season-select-button" data-season="2"><a class="saisons">Season 02</a></button></li>
-                <li><button id="S3" class="season-select-button" data-season="3"><a class="saisons">Season 03</a></button></li>
-                <li><button id="S4" class="season-select-button" data-season="4"><a class="saisons">Season 04</a></button></li>
+                <li>
+                  <button class="season-select-button" data-season="1">
+                    Saison 01
+                  </button>
+                </li>
+                <li>
+                  <button class="season-select-button" data-season="2">
+                    Saison 02
+                  </button>
+                </li>
+                <li>
+                  <button class="season-select-button" data-season="3">
+                    Saison 03
+                  </button>
+                </li>
+                <li>
+                  <button class="season-select-button" data-season="4">
+                    Saison 04
+                  </button>
+                </li>
               </ul>
-            </div>        
+            </div>
           </div>
+          <a href="#forces-faiblesses">Next</a>
         </section>
 
         <section class="forces-faiblesses hidden">
-          <h1 class="titrePage">Strengths and weaknesses of the different elements</h1>
-          <span class="police">Click on an item to see its strengths and weaknesses</span>
+          <h1>List of strengths and weaknesses of all elements</h1>
+          <span
+            >Click on element circles to show their strenghts and
+            weaknesses</span
+          >
           <div class="forces-faiblesses-wrapper">
-            <svg class="forces-faiblesses-svg"></svg>  
-            <svg class ="liste-elements-svg"></svg>          
+            <svg class="forces-faiblesses-svg"></svg>
+            <svg class="liste-elements-svg"></svg>
           </div>
+          <a href="#schema-elements">Next</a>
+          <a href="#home">Previous</a>
         </section>
 
-
-        <section class="schema-elements  hidden">
-          <h1 class="titrePage">Strength of one element over the others</h1>
-            <div class="schema-elements-wrapper">
-              <select name="type" id="type">
-              </select>
-              <svg class="schema-element-svg"></svg>       
-            </div>
+        <section class="schema-elements hidden">
+          <h1>Schema showing strenghts of selected elements toward others</h1>
+          <h2 class="schema-element-name"></h2>
+          <select name="type" id="type"></select>
+          <div class="schema-elements-wrapper">
+            <svg class="schema-element-svg"></svg>
+          </div>
+          <a href="#pokemons-par-type">Next</a>
+          <a href="#forces-faiblesses">Previous</a>
         </section>
 
         <section class="pokemons-par-type hidden">
-          <h1 class="titrePage">Number of pokemons per type</h1>
+          <h1>Number of pokemons classed by their type</h1>
           <h2>Number of pokemons</h2>
           <div class="pokemons-par-type-wrapper">
-            <svg class="nb-par-type-svg"></svg>  
+            <svg class="nb-par-type-svg"></svg>
           </div>
-          <h2 style=" display: flex; justify-content:center;">Element concerned</h2>
+          <h2 style="display: flex; justify-content: center">
+            Concerned element
+          </h2>
+          <a href="#combat">Next</a>
+          <a href="#schema-elements">Previous</a>
         </section>
 
         <section class="combat hidden">
-          <h1 class="titrePage">Pokemon fight</h1>
-            <div class="combat-wrapper">
-              <img id="construction"src="img/pageConstruction.png"/>
-              <svg class="combat-svg"></svg> 
-            </div>
+          <div class="combat-wrapper">
+            <img src="/img/combatV2.png" />
+            <svg class="combat-svg"></svg>
+            <a href="#pokemons-par-type">Previous</a>
+          </div>
         </section>
       </body>
     </main>
-    <footer>
-    </footer>
+    <footer></footer>
   </body>
 </html>

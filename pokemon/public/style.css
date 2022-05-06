@@ -5,8 +5,14 @@
 #containerLogo{
     display:flex;
     justify-content:center;
-    
 }
+
+#background{
+    background-image: url("../img/foretPokemon.png");
+    background-repeat: no-repeat;
+    background-size: cover;    
+}
+
 /* pour les ID c est # et un point pour les classes*/
 #logoMain{
     margin:1% 0;
@@ -34,7 +40,7 @@
 #PSsaison {
      display: block;
      padding: 25px;
-     width: 230px;
+     width: 240px;
      background-image: url(./img/casquetteSacha.png);
      background-repeat: no-repeat;
      background-color: #C2B9AC;
@@ -52,7 +58,7 @@
 #PType {
     display: block;
     padding: 25px;
-    width: 200px;
+    width: 240px;
     background-image: url(./img/pokeball.png);
     background-repeat: no-repeat;
     background-color:#33abd6;
@@ -70,7 +76,7 @@
 #PTaux {
     display: block;
     padding: 25px;
-    width: 210px;
+    width: 240px;
     background-image: url(./img/silhouette.png);
     background-repeat: no-repeat;
     background-color:#d44828;
@@ -106,7 +112,7 @@
 #ExComb {
     display: block;
     padding: 25px;
-    width: 220px;
+    width: 240px;
     background-image: url(./img/combatV2.png);
     background-repeat: no-repeat;
     background-color:#22b544;
@@ -126,6 +132,7 @@
     text-decoration: none;
     color:black;
     font-family: pokemon;
+    font-size: 16px;
     letter-spacing: 2px;
 }
 
@@ -240,16 +247,86 @@ li {
     transition: 440ms;
     background-color: #8994bd; 
 }
+/* Mise en page des ronds---*/
+/* .circle-resume {
+    background-size: 1200px;
+}
+.pokeCircle {
+    
+} */
+/* .pokeText {
+    font-size: 14px;
+} */
+
+/*Type de pokemon-----------------------------------------------------------------------------------------------*/  
+.nb-par-type-svg {
+height: 650px;
+}
+
+/* Pokétype----------------------------------------------------------------------------------------------------*/
+.PoketypePolice {
+    font-family: Dosis;
+    letter-spacing: 1px;
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 0 0 0 10px;
+}
+
+/* .np-par-type-drawn {
+    visibility: hidden;
+} */
 
 /*Page élément contre élément----------------------------------------------------------------------------------*/
-
 .police {
     font-family: pokemon;
     letter-spacing: 3px;
     padding: 0 20px;
 }
 
-/*Page de compbat----------------------------------------------------------------------------------------------*/
+/*permet de centrer les éléments à la page*/
+.schema-elements-wrapper {
+    display:flex;
+    flex-direction: row-reverse;
+    justify-content:center;
+    align-items: start; 
+    font-family: Dosis; 
+}
+
+/*traite le svg*/
+.schema-element-svg{
+    display:block;
+    align-items: start;
+    margin: 0 10px 0 30px;
+    width: 40%;
+    height: 40%;
+} 
+
+/*traite l'image dans le svg*/
+.dynamic-schema{
+width: 100%;
+height: 100%;
+align-items:start;
+}
+
+.bouton{
+    margin-top:50px;
+    }
+
+/*menu déroulant*/
+#type {
+    display: flex;
+    padding: 15px 10px 15px 70px;
+    background-image: url(./img/pikachu.png);
+    background-repeat: no-repeat;
+    background-color:#eae695;
+    background-size: 2.7em; 
+    background-position: left center;
+    font-family: Pokemon;
+    letter-spacing: 2px;
+    font-size: 22px;
+}
+
+/*Page de combat-----------------------------------------------------------------------------------------------*/
 .combat-wrapper{    
     display:flex;
     justify-content:center;
@@ -260,6 +337,7 @@ li {
 .construction{
     width: 10%;
 }
+
 /* fonts-------------------------------------------------------------------------------------------------------*/
 
 @font-face {
@@ -275,9 +353,9 @@ li {
 
 @font-face {
     font-family: "Dosis", sans-serif;
-    src: rul("https://fonts.googleapis.com");
-    src: rul("https://fonts.gstatic.com");
-    src: rul("https://fonts.googleapis.com/css?family=Dosis");
+    src: url("https://fonts.googleapis.com");
+    src: url("https://fonts.gstatic.com");
+    src: url("https://fonts.googleapis.com/css?family=Dosis");
 }
 
     
