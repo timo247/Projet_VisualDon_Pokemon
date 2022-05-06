@@ -1,6 +1,7 @@
 body{
     font-family: Dosis;
 }
+
 .hidden{
     display:none;
 }
@@ -279,9 +280,9 @@ height: 650px;
     padding: 0 0 0 10px;
 }
 
-/* .np-par-type-drawn {
-    visibility: hidden;
-} */
+text.faiblessesHeader {
+    font-weight: bold;
+}
 
 /*Page élément contre élément----------------------------------------------------------------------------------*/
 .police {
