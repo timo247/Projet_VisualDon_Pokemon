@@ -378,7 +378,7 @@ function drawResumeDatas(orderedDatas, currentSeason) {
 function drawForcesFaiblessesData(fetchedData, elementToDisplay) {
   //Dimensions du svgs montrant les forces et les faiblesses
   const margin = { top: 10, right: 40, bottom: 10, left: 40 };
-  const forcesFaiblessesWidth = screen.width / 2 - margin.left - margin.right;
+  const forcesFaiblessesWidth = 500;
   const forcesFaiblessesHeight =
     (screen.width * 4) / 5 - margin.top - margin.bottom;
 
