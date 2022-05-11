@@ -10,9 +10,6 @@
       type="image/png"
       href="./assets/img/favicon-pikachu.ico"
     />
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200&family=Montserrat:wght@200&display=swap');
-      </style>
   </head>
   <body>
     <header>
@@ -65,21 +62,27 @@
                     id="S1"
                     class="season-select-button saisons"
                     data-season="1"
-                  ></button>
+                  >
+                    Saison 01
+                  </button>
                 </li>
                 <li>
                   <button
                     id="S2"
                     class="season-select-button saisons"
                     data-season="2"
-                  ></button>
+                  >
+                    Saison 02
+                  </button>
                 </li>
                 <li>
                   <button
                     id="S3"
                     class="season-select-button saisons"
                     data-season="3"
-                  ></button>
+                  >
+                    Saison 03
+                  </button>
                 </li>
                 <li>
                   <button
@@ -87,17 +90,40 @@
                     class="season-select-button saisons"
                     data-season="4"
                   >
-                    Saison 4
+                    Saison 04
                   </button>
                 </li>
+              </ul>
+              <ul >
+                <h3>Circle colors regarding pokemon types</h3>
+                <b><li style="color: #B8589D">Ghost</li></b>
+                <b><li style="color: #39AA3E">Grass</li></b>
+                <b><li style="color: #D1AF53">Ground</li></b>
+                <b><li style="color: #B3834D">Rock</li></b>
+                <b><li style="color: #E8427A">Psychic</li></b>
+                <b><li style="color: #2FA4DE">Water</li></b>
+                <b><li style="color: #FAB71B">Electric</li></b>
+               <b><li style="color: #C2B9AC">Normal</li></b> 
+                <b><li style="color: #81351E">Fighting</li></b>
+               <b><li style="color: #914393">Poison</li></b> 
+                <b><li style="color: #B7C308">Bug</li></b>
+                <b><li style="color: #99A7D5">Flying</li></b>
+                <b><li style="color: Cyan">Ice</li></b>
+                <b><li style="color: #4D57A3">Dark</li></b>
+                <b><li style="color: #E73C18">Fire</li></b>
+                <b><li style="color: #4D57A3">Dragon</li></b>
+                <b><li style="color: #F5CAE0">Fairy</li></b>
+                <b><li style="color: #B7B7CF">Steel</li></b>
               </ul>
             </div>
           </div>
         </section>
 
         <section class="forces-faiblesses hidden">
-          <h1>List of strengths and weaknesses of all elements</h1>
-          <span
+          <h1 class="titrePage">
+            List of strengths and weaknesses of all elements
+          </h1>
+          <span class="police"
             >Click on element circles to show their strenghts and
             weaknesses</span
           >
@@ -105,23 +131,20 @@
             <svg class="forces-faiblesses-svg"></svg>
             <svg class="liste-elements-svg"></svg>
           </div>
-          <a href="#schema-elements">Next</a>
-          <a href="#home">Previous</a>
         </section>
 
         <section class="schema-elements hidden">
-          <h1>Schema showing strenghts of selected elements toward others</h1>
-          <h2 class="schema-element-name"></h2>
-          <select name="type" id="type"></select>
+          <h1 class="titrePage">Strength of one element over the others</h1>
           <div class="schema-elements-wrapper">
+            <div class="bouton">
+              <select name="type" id="type"></select>
+            </div>
             <svg class="schema-element-svg"></svg>
           </div>
-          <a href="#pokemons-par-type">Next</a>
-          <a href="#forces-faiblesses">Previous</a>
         </section>
 
         <section class="pokemons-par-type hidden">
-          <h1>Number of pokemons classed by their type</h1>
+          <h1 class="titrePage">Number of pokemons classed by their type</h1>
           <h2>Number of pokemons</h2>
           <div class="pokemons-par-type-wrapper">
             <svg class="nb-par-type-svg"></svg>
@@ -129,15 +152,13 @@
           <h2 style="display: flex; justify-content: center">
             Concerned element
           </h2>
-          <a href="#combat">Next</a>
-          <a href="#schema-elements">Previous</a>
         </section>
 
         <section class="combat hidden">
+          <h1 class="titrePage">Pokemon fight</h1>
           <div class="combat-wrapper">
-            <img src="/img/combatV2.png" />
+            <img id="construction" src="img/pageConstruction.png" />
             <svg class="combat-svg"></svg>
-            <a href="#pokemons-par-type">Previous</a>
           </div>
         </section>
       </body>
@@ -145,3 +166,6 @@
     <footer></footer>
   </body>
 </html>
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Dosis:wght@200;700&family=Montserrat:wght@200&display=swap");
+</style>
