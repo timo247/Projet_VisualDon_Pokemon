@@ -413,7 +413,7 @@ function drawForcesFaiblessesData(fetchedData, elementToDisplay) {
     {
       Type1: "Rock",
       weaknesses: ["Fighting", "Ground", "Steel"],
-      strengths: ["Fire", "Electric", "Flyinf", "Bug"],
+      strengths: ["Fire", "Electric", "Flying", "Bug"],
     },
     {
       Type1: "Psychic",
