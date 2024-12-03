@@ -1,5 +1,6 @@
 # Projet_VisualDon_Pokemon
 projet de visualisation de données à propos de pokemon
+Le résultat peut être consulté à cette adresse: https://dev.timothee-dione.ch/pokemons/visualdon/#forces-faiblesses 
 
 
 # Contexte 
